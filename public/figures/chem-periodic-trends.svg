@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="주기율표 일부(3주기~4주기, 1족~18족 방향)를 격자로 나타낸 도표. 오른쪽으로 갈수록, 위로 갈수록 이온화에너지와 전기음성도가 커지고 원자 반지름은 작아지는 경향을 화살표로 표시했다.">
+  <style>
+    text { font-family: system-ui, -apple-system, 'Segoe UI', 'Malgun Gothic', sans-serif; }
+    .ink { fill: #1c1b19; }
+    .muted { fill: #6b6862; }
+    .grid { stroke: #c9c5bd; fill: none; }
+    .arrow { stroke: #b4531f; fill: none; }
+    .acc { fill: #b4531f; }
+    .cell { fill: none; stroke: #c9c5bd; }
+    .blue { stroke: #3c7fb1; fill: none; }
+    .blueFill { fill: #3c7fb1; }
+    @media (prefers-color-scheme: dark) {
+      .ink { fill: #eceaf0; }
+      .muted { fill: #a3a0aa; }
+      .grid { stroke: #4a4852; }
+      .arrow { stroke: #e8925c; }
+      .acc { fill: #e8925c; }
+      .cell { stroke: #4a4852; }
+      .blue { stroke: #7fb4dd; }
+      .blueFill { fill: #7fb4dd; }
+    }
+  </style>
+
+  <!-- 4x6 grid representing part of periods 2-3 -->
+  <g>
+    <rect x="60" y="60" width="300" height="120" class="cell" stroke-width="1"/>
+    <line x1="110" y1="60" x2="110" y2="180" class="grid" stroke-width="1"/>
+    <line x1="160" y1="60" x2="160" y2="180" class="grid" stroke-width="1"/>
+    <line x1="210" y1="60" x2="210" y2="180" class="grid" stroke-width="1"/>
+    <line x1="260" y1="60" x2="260" y2="180" class="grid" stroke-width="1"/>
+    <line x1="310" y1="60" x2="310" y2="180" class="grid" stroke-width="1"/>
+    <line x1="60" y1="120" x2="360" y2="120" class="grid" stroke-width="1"/>
+  </g>
+
+  <text x="85" y="100" class="ink" font-size="13" text-anchor="middle">Li</text>
+  <text x="135" y="100" class="ink" font-size="13" text-anchor="middle">Be</text>
+  <text x="185" y="100" class="ink" font-size="13" text-anchor="middle">B</text>
+  <text x="235" y="100" class="ink" font-size="13" text-anchor="middle">C</text>
+  <text x="285" y="100" class="ink" font-size="13" text-anchor="middle">N</text>
+  <text x="335" y="100" class="ink" font-size="13" text-anchor="middle">O</text>
+
+  <text x="85" y="160" class="ink" font-size="13" text-anchor="middle">Na</text>
+  <text x="135" y="160" class="ink" font-size="13" text-anchor="middle">Mg</text>
+  <text x="185" y="160" class="ink" font-size="13" text-anchor="middle">Al</text>
+  <text x="235" y="160" class="ink" font-size="13" text-anchor="middle">Si</text>
+  <text x="285" y="160" class="ink" font-size="13" text-anchor="middle">P</text>
+  <text x="335" y="160" class="ink" font-size="13" text-anchor="middle">S</text>
+
+  <!-- horizontal arrow: increasing IE / electronegativity -->
+  <line x1="70" y1="35" x2="350" y2="35" class="arrow" stroke-width="1.8" marker-end="url(#ah2)"/>
+  <text x="210" y="24" class="acc" font-size="12" font-weight="700" text-anchor="middle">이온화에너지·전기음성도 증가</text>
+
+  <!-- vertical arrow: increasing IE upward -->
+  <line x1="400" y1="180" x2="400" y2="60" class="blue" stroke-width="1.8" marker-end="url(#bh2)"/>
+  <text x="440" y="120" class="blueFill" font-size="12" font-weight="700" text-anchor="middle" transform="rotate(-90 440 120)">이온화에너지 증가</text>
+
+  <defs>
+    <marker id="ah2" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <path d="M0,0 L6,3.5 L0,7 Z" class="acc"/>
+    </marker>
+    <marker id="bh2" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+      <path d="M0,0 L6,3.5 L0,7 Z" class="blueFill"/>
+    </marker>
+  </defs>
+
+  <text x="210" y="215" class="muted" font-size="11" text-anchor="middle">아래로 내려갈수록 원자 반지름 증가, 금속성 강화</text>
+  <text x="210" y="232" class="muted" font-size="11" text-anchor="middle">(2주기 → 3주기, 왼쪽 → 오른쪽 원소 일부만 예시로 표시)</text>
+</svg>

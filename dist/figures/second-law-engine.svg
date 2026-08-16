@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 280" role="img" aria-label="열기관 도식 비교. 저온부로 열을 버리는 기관은 가능하지만, 받은 열을 모두 일로 바꾸는 기관은 불가능하다.">
+  <style>
+    text { font-family: system-ui, -apple-system, 'Segoe UI', 'Malgun Gothic', sans-serif; }
+    .ink { fill: #1c1b19; }
+    .muted { fill: #6b6862; }
+    .box { stroke: #c9c5bd; fill: none; }
+    .hot { fill: #b4531f; }
+    .hotS { stroke: #b4531f; fill: none; }
+    .cool { fill: #3c7fb1; }
+    .coolS { stroke: #3c7fb1; fill: none; }
+    .surface { fill: #ffffff; }
+    .bad { stroke: #b4531f; }
+    @media (prefers-color-scheme: dark) {
+      .ink { fill: #eceaf0; }
+      .muted { fill: #a3a0aa; }
+      .box { stroke: #4a4852; }
+      .hot { fill: #e8925c; }
+      .hotS { stroke: #e8925c; }
+      .cool { fill: #7fb4dd; }
+      .coolS { stroke: #7fb4dd; }
+      .surface { fill: #1e1d23; }
+      .bad { stroke: #e8925c; }
+    }
+  </style>
+  <defs>
+    <marker id="sa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="context-stroke"/>
+    </marker>
+  </defs>
+
+  <!-- 가능한 기관 -->
+  <g>
+    <rect x="45" y="34" width="140" height="30" rx="5" class="hot" opacity="0.75"/>
+    <text x="115" y="54" class="surface" font-size="12" font-weight="700" text-anchor="middle">고온 Tₕ</text>
+
+    <path d="M115,68 L115,102" class="hotS" stroke-width="2" marker-end="url(#sa)"/>
+    <text x="126" y="90" class="hot" font-size="12" font-weight="700">Qₕ</text>
+
+    <circle cx="115" cy="136" r="32" class="surface"/>
+    <circle cx="115" cy="136" r="32" class="box" stroke-width="1.5"/>
+    <text x="115" y="141" class="ink" font-size="12" text-anchor="middle">기관</text>
+
+    <path d="M150,136 L212,136" class="box" stroke-width="2" marker-end="url(#sa)"/>
+    <text x="176" y="127" class="ink" font-size="12" font-weight="700" text-anchor="middle">W</text>
+
+    <path d="M115,170 L115,204" class="coolS" stroke-width="2" marker-end="url(#sa)"/>
+    <text x="126" y="192" class="cool" font-size="12" font-weight="700">Q꜀</text>
+
+    <rect x="45" y="208" width="140" height="30" rx="5" class="cool" opacity="0.6"/>
+    <text x="115" y="228" class="surface" font-size="12" font-weight="700" text-anchor="middle">저온 T꜀</text>
+
+    <text x="115" y="262" class="ink" font-size="13" font-weight="700" text-anchor="middle">가능</text>
+  </g>
+
+  <!-- 불가능한 기관 -->
+  <g transform="translate(285,0)">
+    <rect x="45" y="34" width="140" height="30" rx="5" class="hot" opacity="0.75"/>
+    <text x="115" y="54" class="surface" font-size="12" font-weight="700" text-anchor="middle">고온 Tₕ</text>
+
+    <path d="M115,68 L115,102" class="hotS" stroke-width="2" marker-end="url(#sa)"/>
+    <text x="126" y="90" class="hot" font-size="12" font-weight="700">Qₕ</text>
+
+    <circle cx="115" cy="136" r="32" class="surface"/>
+    <circle cx="115" cy="136" r="32" class="box" stroke-width="1.5"/>
+    <text x="115" y="141" class="ink" font-size="12" text-anchor="middle">기관</text>
+
+    <path d="M150,136 L212,136" class="box" stroke-width="2" marker-end="url(#sa)"/>
+    <text x="176" y="127" class="ink" font-size="12" font-weight="700" text-anchor="middle">W</text>
+
+    <text x="115" y="196" class="muted" font-size="11" text-anchor="middle">버리는 열 없음</text>
+
+    <path d="M78,100 L152,174 M152,100 L78,174" class="bad" stroke-width="4" stroke-linecap="round" opacity="0.85"/>
+
+    <text x="115" y="262" class="ink" font-size="13" font-weight="700" text-anchor="middle">불가능</text>
+  </g>
+</svg>

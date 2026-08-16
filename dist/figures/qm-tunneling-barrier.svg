@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 265" role="img" aria-label="퍼텐셜 장벽을 만난 파동함수. 장벽 왼쪽에서는 입사파와 반사파가 진동하고, 장벽 안쪽에서는 진폭이 지수적으로 줄어들며, 장벽을 넘어간 오른쪽에는 작아진 진폭의 투과파가 남는다.">
+  <style>
+    text { font-family: system-ui, -apple-system, 'Segoe UI', 'Malgun Gothic', sans-serif; }
+    .ink { fill: #1c1b19; }
+    .muted { fill: #6b6862; }
+    .axis { stroke: #c9c5bd; }
+    .curve { stroke: #1c1b19; fill: none; }
+    .barrier { fill: #c9c5bd; opacity: 0.5; }
+    .acc { fill: #b4531f; }
+    @media (prefers-color-scheme: dark) {
+      .ink { fill: #eceaf0; }
+      .muted { fill: #a3a0aa; }
+      .axis { stroke: #4a4852; }
+      .curve { stroke: #e8925c; }
+      .barrier { fill: #4a4852; opacity: 0.55; }
+      .acc { fill: #e8925c; }
+    }
+  </style>
+
+  <line x1="30" y1="160" x2="450" y2="160" class="axis" stroke-width="1"/>
+
+  <!-- barrier region -->
+  <rect x="210" y="35" width="70" height="205" class="barrier"/>
+  <text x="245" y="26" class="muted" font-size="11" text-anchor="middle">퍼텐셜 장벽 V₀</text>
+
+  <!-- incoming + reflected wave, left region -->
+  <path d="M30,160 q7,-26 14,0 q7,26 14,0 q7,-26 14,0 q7,26 14,0 q7,-26 14,0 q7,26 14,0 q7,-26 14,0 q7,26 14,0 q7,-26 14,0 q7,26 14,0 q7,-26 14,0 q7,26 14,0 q7,-26 14,0 q7,26 14,0" class="curve" stroke-width="1.6"/>
+
+  <!-- evanescent decay inside barrier -->
+  <path d="M210,160 C230,160 225,120 245,118 C260,117 265,150 280,150" class="curve" stroke-width="1.6"/>
+  <path d="M210,160 C230,160 225,200 245,202 C260,203 265,170 280,170" class="curve" stroke-width="1.6"/>
+
+  <!-- transmitted wave, small amplitude -->
+  <path d="M280,160 q6,-9 12,0 q6,9 12,0 q6,-9 12,0 q6,9 12,0 q6,-9 12,0 q6,9 12,0 q6,-9 12,0 q6,9 12,0 q6,-9 12,0 q6,9 12,0 q6,-9 12,0 q6,9 12,0" class="curve" stroke-width="1.6"/>
+
+  <text x="115" y="196" class="ink" font-size="11" text-anchor="middle">입사파 + 반사파</text>
+  <text x="245" y="255" class="ink" font-size="11" text-anchor="middle">지수적 감쇠</text>
+  <text x="365" y="196" class="acc" font-size="11" font-weight="700" text-anchor="middle">투과파 (진폭 작음)</text>
+</svg>

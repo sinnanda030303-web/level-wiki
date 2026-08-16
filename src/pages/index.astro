@@ -1,0 +1,84 @@
+---
+import Base from '../layouts/Base.astro';
+import { allConcepts, allFields } from '../lib/content';
+import { FIELD_META } from '../lib/types';
+---
+
+<Base title="난이도 슬라이더 백과" wide>
+  <section class="hero">
+    <h1>같은 개념을,<br />내 수준에서 읽기</h1>
+    <p>
+      슬라이더를 움직이면 설명이 자랍니다. 비유만 남기고 수식을 걷어낼 수도,
+      논문 수준까지 끌어올릴 수도 있습니다. 어디서 막히는지 스스로 보이는 게
+      목적입니다.
+    </p>
+  </section>
+
+  <input
+    class="search"
+    id="q"
+    type="search"
+    placeholder="개념 검색 — 엔트로피, 온도, 자유에너지…"
+    autocomplete="off"
+  />
+
+  <div id="results">
+    {
+      allFields.map((field) => (
+        <section class="field-block" data-field={field}>
+          <h2>{FIELD_META[field]?.label ?? field}</h2>
+          <p>{FIELD_META[field]?.blurb}</p>
+          <ul class="link-list">
+            {allConcepts
+              .filter((c) => c.field === field)
+              .map((c) => (
+                <li data-search={`${c.title} ${c.summary} ${c.slug}`}>
+                  <a href={`/c/${c.slug}`}>
+                    <b>{c.title}</b>
+                    <span>{c.summary}</span>
+                  </a>
+                </li>
+              ))}
+          </ul>
+        </section>
+      ))
+    }
+  </div>
+
+  <p class="empty" id="empty" hidden>찾는 개념이 아직 없습니다.</p>
+</Base>
+
+<script>
+  // 개념이 수십 개 수준이라 클라이언트 필터로 충분하다.
+  // 수백 개가 되면 그때 인덱스를 붙이자.
+  const q = document.getElementById('q') as HTMLInputElement | null;
+  const empty = document.getElementById('empty');
+  const items = Array.from(
+    document.querySelectorAll<HTMLLIElement>('#results li[data-search]')
+  );
+  const fields = Array.from(
+    document.querySelectorAll<HTMLElement>('.field-block')
+  );
+
+  q?.addEventListener('input', () => {
+    const term = q.value.trim().toLowerCase();
+    let hits = 0;
+
+    for (const li of items) {
+      const match =
+        !term || (li.dataset.search ?? '').toLowerCase().includes(term);
+      li.hidden = !match;
+      if (match) hits++;
+    }
+
+    // 남은 항목이 없는 분야는 제목까지 통째로 감춘다
+    for (const section of fields) {
+      const visible = Array.from(
+        section.querySelectorAll<HTMLLIElement>('li[data-search]')
+      ).some((li) => !li.hidden);
+      section.hidden = !visible;
+    }
+
+    if (empty) empty.hidden = hits > 0;
+  });
+</script>

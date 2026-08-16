@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 265" role="img" aria-label="속박된 계의 에너지 준위. 우물 바닥 근처에서는 준위 간격이 뚜렷하게 떨어져 있고, 우물 위쪽 경계를 넘어서면 이산적인 선이 아니라 연속적인 띠로 바뀐다.">
+  <style>
+    text { font-family: system-ui, -apple-system, 'Segoe UI', 'Malgun Gothic', sans-serif; }
+    .ink { fill: #1c1b19; }
+    .muted { fill: #6b6862; }
+    .axis { stroke: #c9c5bd; }
+    .well { stroke: #6b6862; fill: none; }
+    .level { stroke: #b4531f; }
+    .continuum { fill: #3c7fb1; opacity: 0.18; }
+    .acc { fill: #b4531f; }
+    .acc2 { fill: #3c7fb1; }
+    @media (prefers-color-scheme: dark) {
+      .ink { fill: #eceaf0; }
+      .muted { fill: #a3a0aa; }
+      .axis { stroke: #4a4852; }
+      .well { stroke: #a3a0aa; }
+      .level { stroke: #e8925c; }
+      .continuum { fill: #7fb4dd; opacity: 0.22; }
+      .acc { fill: #e8925c; }
+      .acc2 { fill: #7fb4dd; }
+    }
+  </style>
+
+  <line x1="60" y1="20" x2="60" y2="240" class="axis" stroke-width="1"/>
+  <text x="24" y="26" class="ink" font-size="13" font-weight="700">E</text>
+
+  <!-- well walls -->
+  <path d="M110,240 L110,60 M110,60 L370,60 M370,60 L370,240" class="well" stroke-width="1.5"/>
+
+  <!-- continuum band above well top -->
+  <rect x="60" y="30" width="390" height="26" class="continuum"/>
+  <text x="455" y="47" class="acc2" font-size="11" text-anchor="end">연속 스펙트럼</text>
+
+  <!-- discrete levels, increasing spacing downward closes -->
+  <line x1="110" y1="220" x2="370" y2="220" class="level" stroke-width="2"/>
+  <text x="380" y="224" class="acc" font-size="12">E₁</text>
+
+  <line x1="110" y1="180" x2="370" y2="180" class="level" stroke-width="2"/>
+  <text x="380" y="184" class="acc" font-size="12">E₂</text>
+
+  <line x1="110" y1="125" x2="370" y2="125" class="level" stroke-width="2"/>
+  <text x="380" y="129" class="acc" font-size="12">E₃</text>
+
+  <line x1="110" y1="90" x2="370" y2="90" class="level" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="380" y="94" class="muted" font-size="11">E₄ …</text>
+
+  <text x="240" y="256" class="muted" font-size="11" text-anchor="middle">우물 속에서는 이산적, 우물 위로 넘치면 연속적</text>
+</svg>

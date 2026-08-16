@@ -1,0 +1,41 @@
+---
+import 'katex/dist/katex.min.css';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  wide?: boolean;
+}
+
+const {
+  title,
+  description = '같은 개념을 다섯 단계 난이도로. 슬라이더를 움직여 자기 수준을 찾으세요.',
+  wide = false,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <header class="site-head">
+      <div class="site-head-inner">
+        <a class="site-title" href="/">난이도 슬라이더 백과</a>
+        <span class="site-tagline">아는 만큼만 읽으세요</span>
+      </div>
+    </header>
+    <main class:list={['wrap', wide && 'wrap-wide']}>
+      <slot />
+    </main>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 260" role="img" aria-label="같은 크기의 힘이 서로 다른 질량의 물체에 작용할 때 가속도 벡터 비교. 질량이 작은 왼쪽 물체는 긴 가속도 화살표를, 질량이 큰 오른쪽 물체는 짧은 가속도 화살표를 갖는다.">
+  <style>
+    text { font-family: system-ui, -apple-system, 'Segoe UI', 'Malgun Gothic', sans-serif; }
+    .ink { fill: #1c1b19; }
+    .muted { fill: #6b6862; }
+    .axis { stroke: #c9c5bd; }
+    .box { fill: none; stroke: #1c1b19; stroke-width: 2; }
+    .force { stroke: #3c7fb1; fill: #3c7fb1; }
+    .accel { stroke: #b4531f; fill: #b4531f; }
+    @media (prefers-color-scheme: dark) {
+      .ink { fill: #eceaf0; }
+      .muted { fill: #a3a0aa; }
+      .axis { stroke: #4a4852; }
+      .box { stroke: #eceaf0; }
+      .force { stroke: #7fb4dd; fill: #7fb4dd; }
+      .accel { stroke: #e8925c; fill: #e8925c; }
+    }
+  </style>
+
+  <line x1="20" y1="215" x2="230" y2="215" class="axis" stroke-width="1"/>
+  <line x1="250" y1="215" x2="460" y2="215" class="axis" stroke-width="1"/>
+
+  <!-- Left: light mass -->
+  <rect x="80" y="165" width="50" height="50" class="box"/>
+  <text x="105" y="196" class="ink" font-size="15" font-weight="700" text-anchor="middle">m</text>
+
+  <line x1="130" y1="190" x2="175" y2="190" class="force" stroke-width="3"/>
+  <polygon points="175,184 189,190 175,196" class="force"/>
+  <text x="152" y="176" class="force" font-size="13" font-weight="700" text-anchor="middle">F</text>
+
+  <line x1="105" y1="160" x2="105" y2="90" class="accel" stroke-width="3"/>
+  <polygon points="99,90 105,76 111,90" class="accel"/>
+  <text x="122" y="115" class="accel" font-size="13" font-weight="700">a 큼</text>
+
+  <text x="105" y="238" class="muted" font-size="12" text-anchor="middle">가벼운 물체</text>
+
+  <!-- Right: heavy mass -->
+  <rect x="330" y="140" width="90" height="75" class="box"/>
+  <text x="375" y="184" class="ink" font-size="15" font-weight="700" text-anchor="middle">M</text>
+
+  <line x1="420" y1="177" x2="465" y2="177" class="force" stroke-width="3"/>
+  <polygon points="465,171 479,177 465,183" class="force"/>
+  <text x="442" y="163" class="force" font-size="13" font-weight="700" text-anchor="middle">F</text>
+
+  <line x1="375" y1="135" x2="375" y2="112" class="accel" stroke-width="3"/>
+  <polygon points="369,112 375,98 381,112" class="accel"/>
+  <text x="400" y="118" class="accel" font-size="13" font-weight="700">a 작음</text>
+
+  <text x="375" y="238" class="muted" font-size="12" text-anchor="middle">무거운 물체 (M &gt; m)</text>
+
+  <text x="240" y="24" class="ink" font-size="13" font-weight="700" text-anchor="middle">같은 힘 F, 다른 질량 → 다른 가속도 a = F/m</text>
+</svg>

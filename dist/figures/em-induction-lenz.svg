@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 280" role="img" aria-label="막대자석의 N극을 코일에 가까이 가져가는 그림. 코일을 지나는 자기선속이 늘어나므로, 렌츠의 법칙에 따라 그 증가를 막는 방향으로 코일에 유도전류가 흐른다.">
+  <style>
+    text { font-family: system-ui, -apple-system, 'Segoe UI', 'Malgun Gothic', sans-serif; }
+    .ink { fill: #1c1b19; }
+    .muted { fill: #6b6862; }
+    .coil { stroke: #1c1b19; fill: none; }
+    .acc { fill: #b4531f; stroke: #b4531f; }
+    .blue { fill: #3c7fb1; stroke: #3c7fb1; }
+    .arrow { stroke: #6b6862; fill: #6b6862; }
+    @media (prefers-color-scheme: dark) {
+      .ink { fill: #eceaf0; }
+      .muted { fill: #a3a0aa; }
+      .coil { stroke: #eceaf0; }
+      .acc { fill: #e8925c; stroke: #e8925c; }
+      .blue { fill: #7fb4dd; stroke: #7fb4dd; }
+      .arrow { stroke: #a3a0aa; fill: #a3a0aa; }
+    }
+  </style>
+
+  <!-- bar magnet, N (left, orange) approaching, S (right end of magnet, blue) -->
+  <rect x="40" y="120" width="100" height="40" class="acc" fill-opacity="0.18" stroke-width="2"/>
+  <text x="60" y="146" class="acc" font-size="16" font-weight="700" stroke="none">N</text>
+  <rect x="140" y="120" width="60" height="40" class="blue" fill-opacity="0.18" stroke-width="2"/>
+  <text x="160" y="146" class="blue" font-size="16" font-weight="700" stroke="none">S</text>
+
+  <!-- motion arrow toward coil -->
+  <line x1="205" y1="140" x2="255" y2="140" class="arrow" stroke-width="2.5"/>
+  <path d="M255,140 l-12,-6 l0,12 z" class="arrow" stroke="none"/>
+  <text x="230" y="125" class="muted" font-size="11" text-anchor="middle">이동</text>
+
+  <!-- coil: series of ellipses -->
+  <g class="coil" stroke-width="2.2">
+    <ellipse cx="320" cy="140" rx="18" ry="50"/>
+    <ellipse cx="345" cy="140" rx="18" ry="50"/>
+    <ellipse cx="370" cy="140" rx="18" ry="50"/>
+    <ellipse cx="395" cy="140" rx="18" ry="50"/>
+  </g>
+  <line x1="320" y1="90" x2="320" y2="60" class="coil" stroke-width="2"/>
+  <line x1="395" y1="90" x2="430" y2="60" class="coil" stroke-width="2"/>
+
+  <!-- induced current direction arrows on front coil loop (opposing increasing flux -> field points left inside coil -> current CCW viewed from left/magnet side) -->
+  <g class="blue" stroke="none">
+    <path d="M320,92 l10,6 l-2,-13 z"/>
+    <path d="M320,188 l-10,-6 l2,13 z"/>
+  </g>
+
+  <text x="357" y="205" class="muted" font-size="11" text-anchor="middle">유도전류 (렌츠의 법칙: 자석 접근을 방해하는 방향)</text>
+  <text x="120" y="100" class="ink" font-size="13" font-weight="700" text-anchor="middle">자석이 다가올수록 선속 증가</text>
+</svg>

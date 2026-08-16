@@ -1,0 +1,36 @@
+---
+import Base from '../../layouts/Base.astro';
+import { allFields, conceptsByField } from '../../lib/content';
+import { FIELD_META } from '../../lib/types';
+
+export function getStaticPaths() {
+  return allFields.map((field) => ({ params: { field } }));
+}
+
+const { field } = Astro.params;
+const concepts = conceptsByField(field!);
+const meta = FIELD_META[field!];
+const label = meta?.label ?? field;
+---
+
+<Base title={`${label} — 난이도 슬라이더 백과`} description={meta?.blurb} wide>
+  <section class="hero">
+    <h1>{label}</h1>
+    <p>{meta?.blurb}</p>
+  </section>
+
+  <ul class="link-list">
+    {
+      concepts.map((c) => (
+        <li>
+          <a href={`/c/${c.slug}`}>
+            <b>{c.title}</b>
+            <span>{c.summary}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <a class="back-link" href="/">← 전체 개념</a>
+</Base>

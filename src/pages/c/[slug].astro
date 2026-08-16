@@ -1,0 +1,35 @@
+---
+import Base from '../../layouts/Base.astro';
+import ConceptReader from '../../components/ConceptReader';
+import { allConcepts, getConcept, resolveSlugs } from '../../lib/content';
+
+export function getStaticPaths() {
+  return allConcepts.map((c) => ({ params: { slug: c.slug } }));
+}
+
+const { slug } = Astro.params;
+const concept = getConcept(slug!);
+
+if (!concept) {
+  return Astro.redirect('/404');
+}
+
+const toLink = (c: (typeof allConcepts)[number]) => ({
+  slug: c.slug,
+  title: c.title,
+  summary: c.summary,
+});
+
+const prereq = resolveSlugs(concept.prereq).map(toLink);
+const next = resolveSlugs(concept.next).map(toLink);
+---
+
+<Base title={`${concept.title} — 난이도 슬라이더 백과`} description={concept.summary}>
+  <ConceptReader
+    client:load
+    concept={concept}
+    prereq={prereq}
+    next={next}
+  />
+  <a class="back-link" href={`/f/${concept.field}`}>← 같은 분야의 다른 개념</a>
+</Base>

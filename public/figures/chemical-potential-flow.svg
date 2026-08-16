@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 230" role="img" aria-label="입자는 화학퍼텐셜이 높은 쪽에서 낮은 쪽으로 옮겨가며, 두 값이 같아지면 멈춘다.">
+  <style>
+    text { font-family: system-ui, -apple-system, 'Segoe UI', 'Malgun Gothic', sans-serif; }
+    .ink { fill: #1c1b19; }
+    .muted { fill: #6b6862; }
+    .box { stroke: #c9c5bd; fill: none; }
+    .p1 { fill: #b4531f; }
+    .p2 { fill: #3c7fb1; }
+    .accS { stroke: #b4531f; fill: none; }
+    @media (prefers-color-scheme: dark) {
+      .ink { fill: #eceaf0; }
+      .muted { fill: #a3a0aa; }
+      .box { stroke: #4a4852; }
+      .p1 { fill: #e8925c; }
+      .p2 { fill: #7fb4dd; }
+      .accS { stroke: #e8925c; }
+    }
+  </style>
+  <defs>
+    <marker id="ma" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="context-stroke"/>
+    </marker>
+  </defs>
+
+  <rect x="60" y="52" width="150" height="104" rx="6" class="box" stroke-width="1.6"/>
+  <rect x="270" y="52" width="150" height="104" rx="6" class="box" stroke-width="1.6"/>
+
+  <g class="p1">
+    <circle cx="86" cy="76" r="6"/><circle cx="112" cy="94" r="6"/><circle cx="140" cy="72" r="6"/>
+    <circle cx="168" cy="100" r="6"/><circle cx="94" cy="126" r="6"/><circle cx="150" cy="130" r="6"/>
+    <circle cx="184" cy="70" r="6"/><circle cx="122" cy="118" r="6"/>
+  </g>
+  <g class="p2">
+    <circle cx="308" cy="92" r="6"/><circle cx="352" cy="124" r="6"/><circle cx="390" cy="82" r="6"/>
+  </g>
+
+  <path d="M218,104 L262,104" class="accS" stroke-width="2.2" marker-end="url(#ma)"/>
+
+  <text x="135" y="40" class="ink" font-size="13" font-weight="700" text-anchor="middle">μ 높음</text>
+  <text x="345" y="40" class="ink" font-size="13" font-weight="700" text-anchor="middle">μ 낮음</text>
+
+  <text x="135" y="180" class="muted" font-size="11" text-anchor="middle">입자를 하나 더 넣기 어렵다</text>
+  <text x="345" y="180" class="muted" font-size="11" text-anchor="middle">입자를 받아들일 여지가 있다</text>
+
+  <text x="240" y="212" class="muted" font-size="11" text-anchor="middle">μ₁ = μ₂ 가 되면 알짜 이동이 멈춘다. 이것이 확산 평형이다.</text>
+</svg>

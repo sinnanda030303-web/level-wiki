@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 280" role="img" aria-label="위로 전류가 흐르는 직선 도선 주위에 원을 그리며 도는 자기장. 오른손 엄지를 전류 방향으로 향하면 나머지 손가락이 감기는 방향이 자기장 방향이다.">
+  <style>
+    text { font-family: system-ui, -apple-system, 'Segoe UI', 'Malgun Gothic', sans-serif; }
+    .ink { fill: #1c1b19; }
+    .muted { fill: #6b6862; }
+    .wire { stroke: #1c1b19; fill: #1c1b19; }
+    .acc { stroke: #b4531f; fill: #b4531f; }
+    .ring { stroke: #3c7fb1; fill: none; }
+    @media (prefers-color-scheme: dark) {
+      .ink { fill: #eceaf0; }
+      .muted { fill: #a3a0aa; }
+      .wire { stroke: #eceaf0; fill: #eceaf0; }
+      .acc { stroke: #e8925c; fill: #e8925c; }
+      .ring { stroke: #7fb4dd; }
+    }
+  </style>
+
+  <!-- vertical wire with current going up -->
+  <line x1="240" y1="250" x2="240" y2="30" class="wire" stroke-width="4"/>
+  <path d="M240,30 l-9,16 l18,0 z" class="wire" stroke="none"/>
+  <text x="258" y="45" class="ink" font-size="13" font-weight="700">I</text>
+
+  <!-- three elliptical field rings representing circles around the wire, seen in perspective -->
+  <ellipse cx="240" cy="90" rx="70" ry="20" class="ring" stroke-width="1.6"/>
+  <ellipse cx="240" cy="150" rx="110" ry="32" class="ring" stroke-width="1.6"/>
+  <ellipse cx="240" cy="210" rx="150" ry="44" class="ring" stroke-width="1.6"/>
+
+  <!-- arrowheads showing counterclockwise-from-above (right-hand) direction on each ring, front side -->
+  <g class="acc" stroke="none">
+    <path d="M310,90 l-14,-5 l4,14 z"/>
+    <path d="M350,150 l-16,-8 l3,17 z"/>
+    <path d="M390,210 l-18,-10 l2,19 z"/>
+  </g>
+  <g class="acc" stroke="none">
+    <path d="M170,90 l14,5 l-4,-14 z"/>
+    <path d="M130,150 l16,8 l-3,-17 z"/>
+    <path d="M90,210 l18,10 l-2,-19 z"/>
+  </g>
+
+  <text x="240" y="18" class="muted" font-size="11" text-anchor="middle">전류 방향(위)</text>
+  <text x="240" y="270" class="muted" font-size="11" text-anchor="middle">자기장은 도선을 중심으로 원을 그리며 돈다 (오른손 법칙)</text>
+</svg>

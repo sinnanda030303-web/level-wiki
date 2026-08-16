@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 265" role="img" aria-label="슈테른-게를라흐 실험 개요도. 은 원자 빔이 불균일한 자기장을 지나면, 연속적으로 퍼지지 않고 정확히 두 개의 점으로만 갈라져 스크린에 도달한다.">
+  <style>
+    text { font-family: system-ui, -apple-system, 'Segoe UI', 'Malgun Gothic', sans-serif; }
+    .ink { fill: #1c1b19; }
+    .muted { fill: #6b6862; }
+    .axis { stroke: #c9c5bd; }
+    .magnet { fill: #c9c5bd; }
+    .beam { stroke: #6b6862; fill: none; }
+    .up { stroke: #b4531f; fill: none; }
+    .down { stroke: #3c7fb1; fill: none; }
+    .dotUp { fill: #b4531f; }
+    .dotDown { fill: #3c7fb1; }
+    @media (prefers-color-scheme: dark) {
+      .ink { fill: #eceaf0; }
+      .muted { fill: #a3a0aa; }
+      .axis { stroke: #4a4852; }
+      .magnet { fill: #4a4852; }
+      .beam { stroke: #a3a0aa; }
+      .up { stroke: #e8925c; }
+      .down { stroke: #7fb4dd; }
+      .dotUp { fill: #e8925c; }
+      .dotDown { fill: #7fb4dd; }
+    }
+  </style>
+
+  <!-- oven / source -->
+  <rect x="20" y="118" width="34" height="28" class="magnet"/>
+  <text x="37" y="160" class="muted" font-size="10" text-anchor="middle">은 원자 오븐</text>
+
+  <!-- incoming beam -->
+  <line x1="54" y1="132" x2="150" y2="132" class="beam" stroke-width="2"/>
+
+  <!-- magnet poles (inhomogeneous field) -->
+  <path d="M150,60 L260,80 L260,130 L150,140 Z" class="magnet"/>
+  <path d="M150,204 L260,184 L260,134 L150,124 Z" class="magnet"/>
+  <text x="205" y="46" class="muted" font-size="10" text-anchor="middle">N</text>
+  <text x="205" y="220" class="muted" font-size="10" text-anchor="middle">S</text>
+  <text x="205" y="160" class="muted" font-size="10" text-anchor="middle">불균일 자기장</text>
+
+  <!-- split beams -->
+  <path d="M260,132 C310,132 340,80 420,72" class="up" stroke-width="2"/>
+  <path d="M260,132 C310,132 340,184 420,192" class="down" stroke-width="2"/>
+
+  <!-- screen -->
+  <line x1="430" y1="30" x2="430" y2="235" class="axis" stroke-width="1.5"/>
+  <circle cx="428" cy="72" r="5" class="dotUp"/>
+  <circle cx="428" cy="192" r="5" class="dotDown"/>
+  <text x="443" y="76" class="dotUp" font-size="12" font-weight="700">↑</text>
+  <text x="443" y="196" class="dotDown" font-size="12" font-weight="700">↓</text>
+
+  <text x="430" y="252" class="muted" font-size="11" text-anchor="middle">점 두 개뿐, 그 사이는 없다</text>
+</svg>

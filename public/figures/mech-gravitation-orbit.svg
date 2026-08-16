@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 300" role="img" aria-label="태양을 초점으로 도는 타원 궤도. 태양에 가까운 근일점 부근에서는 짧은 시간에 넓은 각도를 쓸고 지나가고, 먼 원일점 부근에서는 좁은 각도만 쓸고 지나가지만, 두 부채꼴의 넓이는 같다.">
+  <style>
+    text { font-family: system-ui, -apple-system, 'Segoe UI', 'Malgun Gothic', sans-serif; }
+    .ink { fill: #1c1b19; }
+    .muted { fill: #6b6862; }
+    .orbit { stroke: #1c1b19; fill: none; }
+    .sun { fill: #b4531f; }
+    .sectorNear { fill: #3c7fb1; }
+    .sectorFar { fill: #3c7fb1; }
+    @media (prefers-color-scheme: dark) {
+      .ink { fill: #eceaf0; }
+      .muted { fill: #a3a0aa; }
+      .orbit { stroke: #eceaf0; }
+      .sun { fill: #e8925c; }
+      .sectorNear { fill: #7fb4dd; }
+      .sectorFar { fill: #7fb4dd; }
+    }
+  </style>
+
+  <ellipse cx="210" cy="140" rx="160" ry="90" class="orbit" stroke-width="2"/>
+
+  <polygon points="78,140 71.4,185 55.4,163.3 50,140 55.4,116.7 71.4,95"
+           class="sectorNear" fill-opacity="0.55"/>
+  <polygon points="78,140 367.6,124.4 369.4,132.2 370,140 369.4,147.8 367.6,155.6"
+           class="sectorFar" fill-opacity="0.55"/>
+
+  <circle cx="78" cy="140" r="9" class="sun"/>
+  <text x="78" y="118" class="ink" font-size="13" font-weight="700" text-anchor="middle">태양</text>
+
+  <text x="45" y="228" class="muted" font-size="12" text-anchor="middle">근일점 부근</text>
+  <text x="45" y="244" class="muted" font-size="12" text-anchor="middle">(짧은 시간, 큰 각도)</text>
+
+  <text x="368" y="228" class="muted" font-size="12" text-anchor="middle">원일점 부근</text>
+  <text x="368" y="244" class="muted" font-size="12" text-anchor="middle">(같은 시간, 작은 각도)</text>
+
+  <text x="220" y="278" class="ink" font-size="13" text-anchor="middle">두 부채꼴의 넓이는 같다 — 케플러 제2법칙</text>
+</svg>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 265" role="img" aria-label="위치와 운동량의 불확정성 상충 관계. 위쪽은 위치가 좁게 국한된 파동꾸러미로 여러 파장이 섞여 운동량이 넓게 퍼진다. 아래쪽은 파장이 하나로 뚜렷해 운동량은 좁지만 위치는 공간 전체에 퍼져 있다.">
+  <style>
+    text { font-family: system-ui, -apple-system, 'Segoe UI', 'Malgun Gothic', sans-serif; }
+    .ink { fill: #1c1b19; }
+    .muted { fill: #6b6862; }
+    .axis { stroke: #c9c5bd; }
+    .curve { stroke: #b4531f; fill: none; }
+    .env { stroke: #b4531f; fill: #b4531f; opacity: 0.08; }
+    .curve2 { stroke: #3c7fb1; fill: none; }
+    .acc { fill: #b4531f; }
+    .acc2 { fill: #3c7fb1; }
+    @media (prefers-color-scheme: dark) {
+      .ink { fill: #eceaf0; }
+      .muted { fill: #a3a0aa; }
+      .axis { stroke: #4a4852; }
+      .curve { stroke: #e8925c; }
+      .env { stroke: #e8925c; fill: #e8925c; opacity: 0.12; }
+      .curve2 { stroke: #7fb4dd; }
+      .acc { fill: #e8925c; }
+      .acc2 { fill: #7fb4dd; }
+    }
+  </style>
+
+  <!-- top: narrow x, wide p -->
+  <line x1="40" y1="80" x2="440" y2="80" class="axis" stroke-width="1"/>
+  <path d="M40,80 C120,80 150,20 190,80 C230,140 260,80 440,80" class="env" stroke-width="1.2"/>
+  <path d="M150,80 q4,-38 8,0 q4,38 8,0 q4,-38 8,0 q4,38 8,0 q4,-38 8,0 q4,38 8,0 q4,-38 8,0 q4,38 8,0" class="curve" stroke-width="1.5"/>
+  <text x="240" y="14" class="ink" font-size="12" font-weight="700" text-anchor="middle">위치가 뚜렷할수록</text>
+  <text x="240" y="100" class="acc" font-size="11" text-anchor="middle">Δx 작음 · Δp 큼</text>
+
+  <!-- bottom: wide x, narrow p -->
+  <line x1="40" y1="210" x2="440" y2="210" class="axis" stroke-width="1"/>
+  <path d="M40,210 q9,-16 18,0 q9,16 18,0 q9,-16 18,0 q9,16 18,0 q9,-16 18,0 q9,16 18,0 q9,-16 18,0 q9,16 18,0 q9,-16 18,0 q9,16 18,0 q9,-16 18,0 q9,16 18,0 q9,-16 18,0 q9,16 18,0 q9,-16 18,0 q9,16 18,0 q9,-16 18,0 q9,16 18,0 q9,-16 18,0 q9,16 18,0 q9,-16 18,0 q9,16 18,0" class="curve2" stroke-width="1.5"/>
+  <text x="240" y="240" class="ink" font-size="12" font-weight="700" text-anchor="middle">파장이 뚜렷할수록</text>
+  <text x="240" y="256" class="acc2" font-size="11" text-anchor="middle">Δx 큼 · Δp 작음</text>
+</svg>
