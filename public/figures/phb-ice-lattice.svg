@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 275" role="img" aria-label="왼쪽은 얼음 Ih의 육각 고리 구조로 분자가 네 이웃하고만 수소결합해 가운데에 빈 공간이 남는다. 오른쪽은 액체 물로 그물이 부분적으로 끊기고 휘어져 분자들이 더 가까이 파고들어 있다.">
+  <style>
+    text { font-family: system-ui, -apple-system, 'Segoe UI', 'Malgun Gothic', sans-serif; }
+    .ink { fill: #1c1b19; }
+    .muted { fill: #6b6862; }
+    .acc { fill: #b4531f; }
+    .blue { fill: #3c7fb1; }
+    .mol { fill: #3c7fb1; stroke: #1c1b19; }
+    .hb { stroke: #6b6862; fill: none; }
+    .frame { stroke: #c9c5bd; fill: none; }
+    .hole { stroke: #b4531f; fill: none; }
+    @media (prefers-color-scheme: dark) {
+      .ink { fill: #eceaf0; }
+      .muted { fill: #a3a0aa; }
+      .acc { fill: #e8925c; }
+      .blue { fill: #7fb4dd; }
+      .mol { fill: #7fb4dd; stroke: #eceaf0; }
+      .hb { stroke: #a3a0aa; }
+      .frame { stroke: #4a4852; }
+      .hole { stroke: #e8925c; }
+    }
+  </style>
+
+  <text x="120" y="26" class="ink" font-size="13" font-weight="700" text-anchor="middle">얼음 Ih · 열린 육각 골격</text>
+  <text x="360" y="26" class="ink" font-size="13" font-weight="700" text-anchor="middle">액체 물 · 휘고 끊긴 그물</text>
+
+  <rect x="20" y="38" width="200" height="180" rx="6" class="frame" stroke-width="1"/>
+  <rect x="260" y="38" width="200" height="180" rx="6" class="frame" stroke-width="1"/>
+
+  <!-- 왼쪽: 육각 고리 -->
+  <g class="hb" stroke-width="1.6" stroke-dasharray="4 3">
+    <line x1="120" y1="73" x2="72" y2="101"/>
+    <line x1="72" y1="101" x2="72" y2="156"/>
+    <line x1="72" y1="156" x2="120" y2="184"/>
+    <line x1="120" y1="184" x2="168" y2="156"/>
+    <line x1="168" y1="156" x2="168" y2="101"/>
+    <line x1="168" y1="101" x2="120" y2="73"/>
+    <line x1="120" y1="73" x2="120" y2="50"/>
+    <line x1="72" y1="101" x2="48" y2="88"/>
+    <line x1="168" y1="101" x2="192" y2="88"/>
+    <line x1="72" y1="156" x2="48" y2="170"/>
+    <line x1="168" y1="156" x2="192" y2="170"/>
+    <line x1="120" y1="184" x2="120" y2="207"/>
+  </g>
+  <circle cx="120" cy="128" r="20" class="hole" stroke-width="1.4" stroke-dasharray="3 3"/>
+  <text x="120" y="132" class="acc" font-size="11" font-weight="700" text-anchor="middle">빈 공간</text>
+  <g class="mol" stroke-width="1.2">
+    <circle cx="120" cy="73" r="9"/>
+    <circle cx="72" cy="101" r="9"/>
+    <circle cx="72" cy="156" r="9"/>
+    <circle cx="120" cy="184" r="9"/>
+    <circle cx="168" cy="156" r="9"/>
+    <circle cx="168" cy="101" r="9"/>
+  </g>
+  <text x="120" y="234" class="muted" font-size="11" text-anchor="middle">이웃 4개 · 채움률 약 0.34</text>
+
+  <!-- 오른쪽: 액체 -->
+  <g class="hb" stroke-width="1.4" stroke-dasharray="4 3">
+    <line x1="330" y1="76" x2="356" y2="66"/>
+    <line x1="356" y1="66" x2="386" y2="82"/>
+    <line x1="330" y1="76" x2="322" y2="102"/>
+    <line x1="322" y1="102" x2="348" y2="96"/>
+    <line x1="348" y1="96" x2="374" y2="108"/>
+    <line x1="374" y1="108" x2="398" y2="98"/>
+    <line x1="322" y1="102" x2="332" y2="128"/>
+    <line x1="348" y1="96" x2="358" y2="122"/>
+    <line x1="358" y1="122" x2="384" y2="132"/>
+    <line x1="332" y1="128" x2="340" y2="152"/>
+    <line x1="358" y1="122" x2="366" y2="150"/>
+    <line x1="384" y1="132" x2="392" y2="158"/>
+    <line x1="366" y1="150" x2="392" y2="158"/>
+  </g>
+  <g class="mol" stroke-width="1.2">
+    <circle cx="330" cy="76" r="9"/><circle cx="356" cy="66" r="9"/><circle cx="386" cy="82" r="9"/>
+    <circle cx="322" cy="102" r="9"/><circle cx="348" cy="96" r="9"/><circle cx="374" cy="108" r="9"/><circle cx="398" cy="98" r="9"/>
+    <circle cx="332" cy="128" r="9"/><circle cx="358" cy="122" r="9"/><circle cx="384" cy="132" r="9"/>
+    <circle cx="340" cy="152" r="9"/><circle cx="366" cy="150" r="9"/><circle cx="392" cy="158" r="9"/>
+  </g>
+  <text x="360" y="234" class="muted" font-size="11" text-anchor="middle">골격이 무너진 자리로 이웃이 파고듭니다</text>
+
+  <text x="240" y="262" class="muted" font-size="11" text-anchor="middle">실제 밀도 차이는 약 9%입니다. 그림은 차이를 크게 과장했습니다.</text>
+</svg>

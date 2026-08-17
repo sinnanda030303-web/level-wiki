@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 285" role="img" aria-label="관측자가 보는 쌍무지개의 기하. 해를 등진 방향인 대일점은 지평선 아래에 있고, 그 점을 중심으로 각반지름 42도에 1차 무지개가, 51도에 2차 무지개가 걸린다. 1차는 바깥이 빨강, 2차는 바깥이 보라로 색 순서가 뒤집혀 있으며, 두 무지개 사이는 알렉산더의 어두운 띠다.">
+  <defs>
+    <radialGradient id="bowP" gradientUnits="userSpaceOnUse" cx="240" cy="268" r="150">
+      <stop offset="0.690" stop-color="#5b3f9e" stop-opacity="0"/>
+      <stop offset="0.706" stop-color="#5b3f9e"/>
+      <stop offset="0.722" stop-color="#3c7fb1"/>
+      <stop offset="0.734" stop-color="#4e9a4e"/>
+      <stop offset="0.742" stop-color="#d6b93c"/>
+      <stop offset="0.750" stop-color="#d34e24"/>
+      <stop offset="0.762" stop-color="#d34e24" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bowS" gradientUnits="userSpaceOnUse" cx="240" cy="268" r="150">
+      <stop offset="0.860" stop-color="#d34e24" stop-opacity="0"/>
+      <stop offset="0.876" stop-color="#d34e24"/>
+      <stop offset="0.890" stop-color="#d6b93c"/>
+      <stop offset="0.903" stop-color="#4e9a4e"/>
+      <stop offset="0.918" stop-color="#3c7fb1"/>
+      <stop offset="0.935" stop-color="#5b3f9e"/>
+      <stop offset="0.955" stop-color="#5b3f9e" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="skyclip"><rect x="0" y="0" width="480" height="228"/></clipPath>
+  </defs>
+  <style>
+    text { font-family: system-ui, -apple-system, 'Segoe UI', 'Malgun Gothic', sans-serif; }
+    .ink { fill: #1c1b19; }
+    .muted { fill: #6b6862; }
+    .ground { fill: #c9c5bd; opacity: 0.55; }
+    .hz { stroke: #c9c5bd; }
+    .dark { stroke: #6b6862; fill: none; opacity: 0.22; }
+    .aux { stroke: #6b6862; fill: none; opacity: 0.7; }
+    .acc { fill: #b4531f; }
+    .accs { stroke: #b4531f; }
+    .stem { stroke: #6b6862; }
+    @media (prefers-color-scheme: dark) {
+      .ink { fill: #eceaf0; }
+      .muted { fill: #a3a0aa; }
+      .ground { fill: #4a4852; opacity: 0.7; }
+      .hz { stroke: #4a4852; }
+      .dark { stroke: #a3a0aa; opacity: 0.20; }
+      .aux { stroke: #a3a0aa; }
+      .acc { fill: #e8925c; }
+      .accs { stroke: #e8925c; }
+      .stem { stroke: #a3a0aa; }
+    }
+  </style>
+
+  <g clip-path="url(#skyclip)">
+    <!-- 알렉산더의 어두운 띠 : 42도와 51도 사이 -->
+    <circle cx="240" cy="268" r="122" class="dark" stroke-width="20" fill="none"/>
+    <!-- 1차 무지개 -->
+    <circle cx="240" cy="268" r="108.5" stroke="url(#bowP)" stroke-width="12" fill="none"/>
+    <!-- 2차 무지개 (더 흐리다) -->
+    <circle cx="240" cy="268" r="137" stroke="url(#bowS)" stroke-width="16" fill="none" stroke-opacity="0.6"/>
+
+    <!-- 각도 안내선 -->
+    <line x1="240" y1="268" x2="332" y2="150" class="aux" stroke-width="1" stroke-dasharray="4 3"/>
+    <line x1="240" y1="268" x2="240" y2="120" class="aux" stroke-width="1" stroke-dasharray="4 3" opacity="0.4"/>
+  </g>
+
+  <!-- 지면 -->
+  <rect x="0" y="228" width="480" height="57" class="ground"/>
+  <line x1="0" y1="228" x2="480" y2="228" class="hz" stroke-width="1.5"/>
+
+  <!-- 대일점 -->
+  <line x1="232" y1="268" x2="248" y2="268" class="accs" stroke-width="1.5"/>
+  <line x1="240" y1="260" x2="240" y2="276" class="accs" stroke-width="1.5"/>
+  <text x="240" y="255" class="acc" font-size="11" font-weight="700" text-anchor="middle">대일점 (지평선 아래)</text>
+  <text x="240" y="282" class="muted" font-size="10" text-anchor="middle">내 그림자 머리가 가리키는 방향 · 사람마다 다르다</text>
+
+  <!-- 관측자 -->
+  <circle cx="44" cy="215" r="6" class="ink"/>
+  <line x1="44" y1="221" x2="44" y2="240" class="stem" stroke-width="2"/>
+  <text x="44" y="205" class="muted" font-size="10" text-anchor="middle">관측자</text>
+
+  <!-- 각도 라벨 -->
+  <text x="318" y="199" class="ink" font-size="12" font-weight="700">42°</text>
+  <text x="342" y="153" class="ink" font-size="12" font-weight="700">51°</text>
+
+  <text x="80" y="60" class="ink" font-size="12" font-weight="700">2차 무지개</text>
+  <text x="80" y="74" class="muted" font-size="10">바깥이 보라 — 색 순서가 반대</text>
+  <text x="80" y="87" class="muted" font-size="10">내부 반사가 두 번, 훨씬 흐리다</text>
+
+  <text x="80" y="130" class="ink" font-size="12" font-weight="700">1차 무지개</text>
+  <text x="80" y="144" class="muted" font-size="10">바깥이 빨강</text>
+
+  <text x="358" y="205" class="muted" font-size="10" text-anchor="middle">알렉산더의</text>
+  <text x="358" y="218" class="muted" font-size="10" text-anchor="middle">어두운 띠</text>
+  <line x1="330" y1="200" x2="300" y2="188" class="aux" stroke-width="1"/>
+
+  <text x="240" y="20" class="muted" font-size="11" text-anchor="middle">무지개는 하늘에 걸린 물체가 아니라, 대일점에서 42°·51° 벌어진 &lt;방향&gt;이다</text>
+</svg>

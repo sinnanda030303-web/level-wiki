@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 250" role="img" aria-label="왼쪽은 위아래로 갈라진 공기가 뒷전에서 동시에 만난다는 통설의 그림이고, 오른쪽은 실제 실험 결과로 위쪽 공기가 뒷전을 훨씬 먼저 지나가 버린 모습이다.">
+  <style>
+    text { font-family: system-ui, -apple-system, 'Segoe UI', 'Malgun Gothic', sans-serif; }
+    .ink { fill: #1c1b19; }
+    .muted { fill: #6b6862; }
+    .acc { fill: #b4531f; }
+    .blue { fill: #3c7fb1; }
+    .foil { fill: #c9c5bd; stroke: #1c1b19; }
+    .frame { stroke: #c9c5bd; fill: none; }
+    .flow { stroke: #6b6862; fill: none; }
+    .dotU { fill: #b4531f; }
+    .dotL { fill: #3c7fb1; }
+    .xmark { stroke: #b4531f; fill: none; }
+    @media (prefers-color-scheme: dark) {
+      .ink { fill: #eceaf0; }
+      .muted { fill: #a3a0aa; }
+      .acc { fill: #e8925c; }
+      .blue { fill: #7fb4dd; }
+      .foil { fill: #4a4852; stroke: #eceaf0; }
+      .frame { stroke: #4a4852; }
+      .flow { stroke: #a3a0aa; }
+      .dotU { fill: #e8925c; }
+      .dotL { fill: #7fb4dd; }
+      .xmark { stroke: #e8925c; }
+    }
+  </style>
+
+  <rect x="14" y="34" width="216" height="152" rx="6" class="frame" stroke-width="1"/>
+  <rect x="250" y="34" width="216" height="152" rx="6" class="frame" stroke-width="1"/>
+
+  <text x="122" y="24" class="acc" font-size="12.5" font-weight="700" text-anchor="middle">통설 · 동시 통과 가정</text>
+  <text x="358" y="24" class="ink" font-size="12.5" font-weight="700" text-anchor="middle">실제 · 위쪽이 먼저 도착</text>
+
+  <!-- 왼쪽 날개 -->
+  <path d="M42,116 C64,86 118,80 192,120 C132,128 76,128 42,116 Z" class="foil" stroke-width="1.6"/>
+  <path d="M20,116 L40,116" class="flow" stroke-width="1.4"/>
+  <circle cx="30" cy="116" r="4" class="dotU"/>
+  <circle cx="30" cy="116" r="4" class="dotL" opacity="0"/>
+  <text x="24" y="106" class="muted" font-size="10">출발</text>
+
+  <circle cx="192" cy="112" r="4.5" class="dotU"/>
+  <circle cx="192" cy="128" r="4.5" class="dotL"/>
+  <path d="M180,96 L204,96" class="flow" stroke-width="1.2" stroke-dasharray="3 2"/>
+  <text x="150" y="152" class="muted" font-size="10.5">"뒷전에서 다시 만난다"</text>
+
+  <g class="xmark" stroke-width="2.6" stroke-linecap="round">
+    <line x1="196" y1="52" x2="216" y2="72"/>
+    <line x1="216" y1="52" x2="196" y2="72"/>
+  </g>
+  <text x="122" y="172" class="acc" font-size="10.5" text-anchor="middle">이 가정에는 아무 근거가 없습니다</text>
+
+  <!-- 오른쪽 날개 -->
+  <path d="M278,116 C300,86 354,80 428,120 C368,128 312,128 278,116 Z" class="foil" stroke-width="1.6"/>
+  <path d="M256,116 L276,116" class="flow" stroke-width="1.4"/>
+  <circle cx="266" cy="116" r="4" class="dotU"/>
+  <text x="260" y="106" class="muted" font-size="10">출발</text>
+
+  <circle cx="452" cy="122" r="4.5" class="dotU"/>
+  <circle cx="404" cy="126" r="4.5" class="dotL"/>
+  <path d="M410,140 L448,140" class="flow" stroke-width="1.2"/>
+  <path d="M448,140 L442,136 M448,140 L442,144" class="flow" stroke-width="1.2"/>
+  <text x="300" y="152" class="muted" font-size="10.5">위쪽 공기가 뒷전을 지나</text>
+  <text x="300" y="166" class="muted" font-size="10.5">한참 앞서 나가 있습니다</text>
+
+  <text x="240" y="212" class="ink" font-size="11.5" text-anchor="middle">연기 펄스 실험에서 위쪽 공기는 아래쪽보다 확실히 먼저 뒷전을 통과합니다.</text>
+  <text x="240" y="230" class="muted" font-size="11" text-anchor="middle">경로 길이 차이로 계산한 속도차는 필요한 양력의 일부밖에 만들지 못합니다.</text>
+</svg>

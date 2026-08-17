@@ -1,0 +1,43 @@
+---
+import Base from '../../layouts/Base.astro';
+import ConceptReader from '../../components/ConceptReader';
+import {
+  allPhenomena,
+  getPhenomenon,
+  resolveSlugs,
+} from '../../lib/content';
+
+export function getStaticPaths() {
+  return allPhenomena.map((p) => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+const phenomenon = getPhenomenon(slug!);
+
+if (!phenomenon) {
+  return Astro.redirect('/404');
+}
+
+// 현상은 선수 개념 대신 '이 현상을 설명하는 개념'을 아래에 건다.
+const related = resolveSlugs(phenomenon.relatedConcepts).map((c) => ({
+  slug: c.slug,
+  title: c.title,
+  summary: c.summary,
+}));
+---
+
+<Base
+  title={`${phenomenon.title} — 난이도 슬라이더 백과`}
+  description={phenomenon.summary}
+>
+  <ConceptReader
+    client:load
+    concept={phenomenon}
+    eyebrow={{ label: '과학 현상', href: '/phenomena' }}
+    hero={phenomenon.hero}
+    prereq={related}
+    next={related}
+    nextLabel="이 현상을 설명하는 개념"
+  />
+  <a class="back-link" href="/phenomena">← 다른 과학 현상</a>
+</Base>

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 285" role="img" aria-label="물방울 하나를 지나는 빛의 경로. 햇빛이 물방울 표면에서 굴절해 들어가고, 뒷면에서 한 번 내부 반사한 뒤, 다시 굴절해 나온다. 입사각 59.5도, 굴절각 40.3도일 때 편각이 138도로 최소가 되고, 나가는 빛은 들어온 방향의 반대쪽에서 42도 벌어진 방향으로 몰린다.">
+  <style>
+    text { font-family: system-ui, -apple-system, 'Segoe UI', 'Malgun Gothic', sans-serif; }
+    .ink { fill: #1c1b19; }
+    .muted { fill: #6b6862; }
+    .drop { fill: #3c7fb1; opacity: 0.13; stroke: #3c7fb1; }
+    .ray { stroke: #b4531f; fill: none; }
+    .norm { stroke: #6b6862; fill: none; opacity: 0.7; }
+    .aux { stroke: #c9c5bd; fill: none; }
+    .acc { fill: #b4531f; }
+    .blue { fill: #3c7fb1; }
+    @media (prefers-color-scheme: dark) {
+      .ink { fill: #eceaf0; }
+      .muted { fill: #a3a0aa; }
+      .drop { fill: #7fb4dd; opacity: 0.15; stroke: #7fb4dd; }
+      .ray { stroke: #e8925c; }
+      .norm { stroke: #a3a0aa; }
+      .aux { stroke: #4a4852; }
+      .acc { fill: #e8925c; }
+      .blue { fill: #7fb4dd; }
+    }
+  </style>
+
+  <circle cx="230" cy="105" r="70" class="drop" stroke-width="1.5"/>
+
+  <!-- 법선 (중심에서 각 접점으로) -->
+  <line x1="230" y1="105" x2="176" y2="13" class="norm" stroke-width="1" stroke-dasharray="4 3"/>
+  <line x1="230" y1="105" x2="295.3" y2="79.7" class="norm" stroke-width="1" stroke-dasharray="4 3"/>
+  <line x1="230" y1="105" x2="244.3" y2="173.6" class="norm" stroke-width="1" stroke-dasharray="4 3"/>
+
+  <!-- 입사광 -->
+  <line x1="45" y1="44.7" x2="194.4" y2="44.7" class="ray" stroke-width="2.2"/>
+  <polygon class="acc" points="130,44.7 121,40.4 121,49"/>
+
+  <!-- 내부 경로 -->
+  <line x1="194.4" y1="44.7" x2="295.3" y2="79.7" class="ray" stroke-width="2.2"/>
+  <line x1="295.3" y1="79.7" x2="244.3" y2="173.6" class="ray" stroke-width="2.2"/>
+
+  <!-- 출사광 -->
+  <line x1="244.3" y1="173.6" x2="155.2" y2="254" class="ray" stroke-width="2.2"/>
+  <polygon class="acc" points="176,235.2 187,234 180,242.5"/>
+
+  <!-- 입사 방향 연장 (반대 방향 기준선) -->
+  <line x1="244.3" y1="173.6" x2="119" y2="173.6" class="aux" stroke-width="1.2" stroke-dasharray="5 4"/>
+
+  <!-- 42도 각 표시 -->
+  <path class="ray" stroke-width="1.2" fill="none" d="M204.3,173.6 A40,40 0 0 0 214.5,200.4"/>
+  <text x="186" y="199" class="acc" font-size="13" font-weight="700">42°</text>
+
+  <!-- 접점 -->
+  <circle cx="194.4" cy="44.7" r="3.2" class="ink"/>
+  <circle cx="295.3" cy="79.7" r="3.2" class="ink"/>
+  <circle cx="244.3" cy="173.6" r="3.2" class="ink"/>
+
+  <!-- 라벨 -->
+  <text x="60" y="34" class="muted" font-size="11">햇빛</text>
+  <text x="150" y="24" class="ink" font-size="11" font-weight="700">① 굴절</text>
+  <text x="152" y="37" class="muted" font-size="10">i = 59.5°, r = 40.3°</text>
+  <text x="310" y="76" class="ink" font-size="11" font-weight="700">② 내부 반사</text>
+  <text x="310" y="89" class="muted" font-size="10">(1차 무지개는 한 번)</text>
+  <text x="262" y="196" class="ink" font-size="11" font-weight="700">③ 굴절</text>
+  <text x="128" y="188" class="muted" font-size="10">들어온 방향</text>
+
+  <text x="330" y="150" class="blue" font-size="11" font-weight="700">편각 D = 180° + 2i − 4r</text>
+  <text x="330" y="164" class="muted" font-size="10">dD/di = 0 → D = 138°(최소)</text>
+  <text x="330" y="177" class="muted" font-size="10">180° − 138° = 42°</text>
+
+  <text x="240" y="276" class="muted" font-size="11" text-anchor="middle">편각이 최소인 곳에서는 입사 위치가 달라져도 나가는 방향이 거의 같다 — 그래서 빛이 몰린다</text>
+</svg>

@@ -151,6 +151,12 @@ a {
   border-bottom-color: var(--accent);
 }
 
+/* 분야 목록과 구분되도록 앞에 칸을 띄운다 */
+.nav-sep {
+  padding-left: 0.4rem;
+  border-left: 1px solid var(--line);
+}
+
 /*
  * '내 지식'은 분야가 아니므로 가로 스크롤되는 분야 목록에 넣지 않는다.
  * 좁은 화면에서 목록 끝으로 밀려 잘리는 것을 막기 위함이다.
@@ -469,6 +475,51 @@ a {
   background: var(--accent-soft);
   padding: 0.1em 0.35em;
   border-radius: 4px;
+}
+
+/* ── 현상 페이지 대표 사진 ─────────────────── */
+.hero-photo {
+  margin: 1.5rem 0 0;
+}
+
+.hero-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.hero-photo figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.hero-caption {
+  display: block;
+}
+
+/* 출처 표시는 라이선스 의무이므로 흐리게 하되 반드시 읽히게 둔다 */
+.hero-credit {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.72rem;
+  color: var(--faint);
+}
+
+.hero-credit a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.hero-credit a:hover {
+  color: var(--accent);
 }
 
 /* ── 도표 ──────────────────────────────────── */

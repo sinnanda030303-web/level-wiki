@@ -1,0 +1,37 @@
+---
+import Base from '../layouts/Base.astro';
+import { allPhenomena } from '../lib/content';
+---
+
+<Base
+  title="과학 현상 — 난이도 슬라이더 백과"
+  description="하늘은 왜 파랄까, 얼음은 왜 물에 뜰까. 일상에서 마주치는 현상을 다섯 단계 난이도로 설명합니다."
+  wide
+>
+  <section class="hero">
+    <h1>과학 현상</h1>
+    <p>
+      매일 보면서도 이유는 모르고 지나치는 것들이 있습니다. 여기서는 그런 질문 하나에
+      답을 하되, 읽는 사람의 수준에 맞춰 깊이를 고를 수 있게 했습니다.
+    </p>
+  </section>
+
+  {
+    allPhenomena.length === 0 ? (
+      <p class="empty">아직 준비된 현상이 없습니다.</p>
+    ) : (
+      <ul class="link-list">
+        {allPhenomena.map((p) => (
+          <li>
+            <a href={`/p/${p.slug}`}>
+              <b>{p.title}</b>
+              <span>{p.summary}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  <a class="back-link" href="/">← 전체 개념</a>
+</Base>

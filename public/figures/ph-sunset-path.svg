@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 285" role="img" aria-label="지구 곡면과 대기층 단면도. 정오에는 햇빛이 대기를 거의 수직으로 가로질러 짧은 경로만 지나지만, 일몰에는 대기를 비스듬히 훑고 지나가 경로가 약 38배 길어진다. 그 사이 파란빛은 거의 다 옆으로 흩어져 빠지고 붉은빛만 남는다.">
+  <style>
+    text { font-family: system-ui, -apple-system, 'Segoe UI', 'Malgun Gothic', sans-serif; }
+    .ink { fill: #1c1b19; }
+    .muted { fill: #6b6862; }
+    .earth { fill: #c9c5bd; }
+    .air { fill: #3c7fb1; opacity: 0.16; }
+    .airline { stroke: #3c7fb1; fill: none; opacity: 0.5; }
+    .rayw { stroke: #6b6862; }
+    .rayr { stroke: #b4531f; }
+    .scat { stroke: #3c7fb1; opacity: 0.8; }
+    .acc { fill: #b4531f; }
+    .blue { fill: #3c7fb1; }
+    @media (prefers-color-scheme: dark) {
+      .ink { fill: #eceaf0; }
+      .muted { fill: #a3a0aa; }
+      .earth { fill: #4a4852; }
+      .air { fill: #7fb4dd; opacity: 0.16; }
+      .airline { stroke: #7fb4dd; }
+      .rayw { stroke: #a3a0aa; }
+      .rayr { stroke: #e8925c; }
+      .scat { stroke: #7fb4dd; }
+      .acc { fill: #e8925c; }
+      .blue { fill: #7fb4dd; }
+    }
+  </style>
+
+  <!-- 대기층 -->
+  <path class="air" d="M40,235.2 A506,506 0 0 1 440,235.2 L440,263.7 A480,480 0 0 0 40,263.7 Z"/>
+  <path class="airline" stroke-width="1" stroke-dasharray="4 3" d="M40,235.2 A506,506 0 0 1 440,235.2"/>
+
+  <!-- 지구 -->
+  <path class="earth" d="M40,263.7 A480,480 0 0 1 440,263.7 L440,285 L40,285 Z"/>
+
+  <!-- 정오 광선 : 수직 -->
+  <line x1="240" y1="40" x2="240" y2="220" class="rayw" stroke-width="2"/>
+  <polygon class="ink" points="240,222 236,213 244,213"/>
+  <line x1="252" y1="194" x2="252" y2="220" class="rayr" stroke-width="3"/>
+  <text x="262" y="205" class="acc" font-size="11" font-weight="700">1</text>
+  <text x="258" y="60" class="ink" font-size="12" font-weight="700">정오</text>
+  <text x="258" y="74" class="muted" font-size="10">대기 통과 경로 = 1</text>
+  <text x="258" y="87" class="muted" font-size="10">파랑이 조금만 빠진다 → 흰 해</text>
+
+  <!-- 일몰 광선 : 거의 수평 -->
+  <line x1="30" y1="220" x2="240" y2="220" class="rayr" stroke-width="2.4"/>
+  <polygon class="acc" points="242,220 233,216 233,224"/>
+  <line x1="80" y1="228" x2="240" y2="228" class="rayr" stroke-width="3"/>
+  <text x="150" y="243" class="acc" font-size="11" font-weight="700">≈ 38</text>
+
+  <!-- 산란되어 빠지는 파란빛 -->
+  <g class="scat" stroke-width="1.3">
+    <line x1="105" y1="220" x2="95" y2="196"/>
+    <line x1="135" y1="220" x2="128" y2="194"/>
+    <line x1="165" y1="220" x2="160" y2="197"/>
+    <line x1="120" y1="220" x2="112" y2="243"/>
+    <line x1="150" y1="220" x2="145" y2="245"/>
+  </g>
+  <text x="96" y="188" class="blue" font-size="10" text-anchor="middle">파랑이 먼저 빠져나간다</text>
+
+  <text x="30" y="208" class="muted" font-size="11">햇빛</text>
+  <text x="252" y="180" class="ink" font-size="12" font-weight="700">일몰</text>
+  <circle cx="245" cy="220" r="3.5" class="ink"/>
+  <text x="290" y="180" class="muted" font-size="10">관측자</text>
+
+  <text x="240" y="272" class="muted" font-size="11" text-anchor="middle">450 nm 투과율: 정오 0.80 → 일몰 0.0002 · 650 nm: 0.95 → 0.15</text>
+  <text x="240" y="18" class="muted" font-size="10" text-anchor="middle">대기 두께는 크게 과장해 그렸다 (실제로는 지구 반지름의 1% 남짓)</text>
+</svg>

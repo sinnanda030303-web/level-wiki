@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 285" role="img" aria-label="번개 한 방의 세 단계. 첫째, 어두운 계단 선도가 구름에서 지면 쪽으로 50미터씩 끊어지며 가지를 치면서 내려온다. 둘째, 지면의 높은 물체에서 상향 선도가 마중 나와 연결된다. 셋째, 밝은 되돌이 뇌격이 지면에서 구름 쪽으로 거슬러 올라간다. 우리가 눈으로 보는 섬광은 이 세 번째 단계다.">
+  <style>
+    text { font-family: system-ui, -apple-system, 'Segoe UI', 'Malgun Gothic', sans-serif; }
+    .ink { fill: #1c1b19; }
+    .muted { fill: #6b6862; }
+    .cloud { fill: #c9c5bd; opacity: 0.4; }
+    .ground { fill: #c9c5bd; opacity: 0.5; }
+    .axis { stroke: #c9c5bd; }
+    .dim { stroke: #6b6862; fill: none; opacity: 0.75; }
+    .bright { stroke: #b4531f; fill: none; }
+    .up { stroke: #3c7fb1; fill: none; }
+    .acc { fill: #b4531f; }
+    .blue { fill: #3c7fb1; }
+    @media (prefers-color-scheme: dark) {
+      .ink { fill: #eceaf0; }
+      .muted { fill: #a3a0aa; }
+      .cloud { fill: #4a4852; opacity: 0.6; }
+      .ground { fill: #4a4852; opacity: 0.7; }
+      .axis { stroke: #4a4852; }
+      .dim { stroke: #a3a0aa; }
+      .bright { stroke: #e8925c; }
+      .up { stroke: #7fb4dd; }
+      .acc { fill: #e8925c; }
+      .blue { fill: #7fb4dd; }
+    }
+  </style>
+
+  <!-- 패널 구분선 -->
+  <line x1="163" y1="30" x2="163" y2="228" class="axis" stroke-width="1" stroke-dasharray="3 4"/>
+  <line x1="323" y1="30" x2="323" y2="228" class="axis" stroke-width="1" stroke-dasharray="3 4"/>
+
+  <!-- 구름 3개 -->
+  <rect x="18" y="34" width="128" height="26" rx="12" class="cloud"/>
+  <rect x="178" y="34" width="128" height="26" rx="12" class="cloud"/>
+  <rect x="338" y="34" width="128" height="26" rx="12" class="cloud"/>
+
+  <!-- 지면 3개 -->
+  <rect x="18" y="212" width="128" height="16" class="ground"/>
+  <rect x="178" y="212" width="128" height="16" class="ground"/>
+  <rect x="338" y="212" width="128" height="16" class="ground"/>
+
+  <!-- ① 계단 선도 -->
+  <path class="dim" stroke-width="2" d="M82,60 L76,76 L88,90 L80,106 L92,120 L84,136 L94,150"/>
+  <path class="dim" stroke-width="1.2" d="M88,90 L106,100 L100,114"/>
+  <path class="dim" stroke-width="1.2" d="M84,136 L66,146 L70,160"/>
+  <path class="dim" stroke-width="1.2" d="M80,106 L62,112"/>
+  <polygon class="muted" points="94,156 89,147 99,148"/>
+  <text x="82" y="24" class="ink" font-size="12" font-weight="700" text-anchor="middle">① 계단 선도</text>
+  <text x="82" y="174" class="muted" font-size="10" text-anchor="middle">어둡다 · 아래로</text>
+  <text x="82" y="187" class="muted" font-size="10" text-anchor="middle">약 50 m씩 끊어서</text>
+  <text x="82" y="200" class="muted" font-size="10" text-anchor="middle">~10⁵ m/s</text>
+
+  <!-- ② 연결 -->
+  <path class="dim" stroke-width="2" d="M242,60 L236,76 L248,90 L240,106 L252,120 L244,136 L254,150 L246,166 L256,180"/>
+  <path class="dim" stroke-width="1.2" d="M248,90 L266,100"/>
+  <path class="dim" stroke-width="1.2" d="M244,136 L226,146"/>
+  <!-- 나무 -->
+  <line x1="262" y1="212" x2="262" y2="196" class="dim" stroke-width="2.5"/>
+  <path class="up" stroke-width="2" d="M262,196 L258,188 L264,182"/>
+  <text x="242" y="24" class="ink" font-size="12" font-weight="700" text-anchor="middle">② 마중과 연결</text>
+  <text x="242" y="174" class="blue" font-size="10" text-anchor="middle">상향 선도가</text>
+  <text x="242" y="187" class="blue" font-size="10" text-anchor="middle">지면에서 올라온다</text>
+  <text x="242" y="200" class="muted" font-size="10" text-anchor="middle">(수십 m 앞에서)</text>
+
+  <!-- ③ 되돌이 뇌격 -->
+  <path class="bright" stroke-width="5" opacity="0.25" d="M402,60 L396,76 L408,90 L400,106 L412,120 L404,136 L414,150 L406,166 L416,180 L412,196 L418,212"/>
+  <path class="bright" stroke-width="2.4" d="M402,60 L396,76 L408,90 L400,106 L412,120 L404,136 L414,150 L406,166 L416,180 L412,196 L418,212"/>
+  <path class="bright" stroke-width="1.2" opacity="0.6" d="M408,90 L426,100"/>
+  <path class="bright" stroke-width="1.2" opacity="0.6" d="M404,136 L386,146"/>
+  <line x1="440" y1="200" x2="440" y2="110" class="bright" stroke-width="1.6" stroke-dasharray="5 3"/>
+  <polygon class="acc" points="440,104 436,113 444,113"/>
+  <text x="402" y="24" class="ink" font-size="12" font-weight="700" text-anchor="middle">③ 되돌이 뇌격</text>
+  <text x="402" y="174" class="acc" font-size="10" font-weight="700" text-anchor="middle">밝다 · 위로</text>
+  <text x="402" y="187" class="muted" font-size="10" text-anchor="middle">~10⁸ m/s (빛의 1/3)</text>
+  <text x="402" y="200" class="muted" font-size="10" text-anchor="middle">최대 전류 ~30 kA</text>
+
+  <text x="240" y="252" class="ink" font-size="11" font-weight="700" text-anchor="middle">우리가 &lt;번개&gt;라고 부르며 보는 섬광은 ③이다. 즉, 위로 올라간다.</text>
+  <text x="240" y="270" class="muted" font-size="10" text-anchor="middle">가지가 아래를 향하는 것은 ①이 아래로 내려오며 갈라진 흔적이기 때문이다</text>
+</svg>

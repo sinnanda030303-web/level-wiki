@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import ConceptReader from '../../components/ConceptReader';
 import { allConcepts, getConcept, resolveSlugs } from '../../lib/content';
+import { FIELD_META } from '../../lib/types';
 
 export function getStaticPaths() {
   return allConcepts.map((c) => ({ params: { slug: c.slug } }));
@@ -32,6 +33,10 @@ const next = resolveSlugs(concept.next).map(toLink);
   <ConceptReader
     client:load
     concept={concept}
+    eyebrow={{
+      label: FIELD_META[concept.field]?.label ?? concept.field,
+      href: `/f/${concept.field}`,
+    }}
     prereq={prereq}
     next={next}
   />

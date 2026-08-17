@@ -1,4 +1,4 @@
-import type { Concept } from './types';
+import type { Concept, Phenomenon } from './types';
 
 const modules = import.meta.glob<{ default: Concept }>(
   '../content/concepts/*.json',
@@ -38,3 +38,31 @@ export function conceptsByField(field: string): Concept[] {
 export const allFields: string[] = [
   ...new Set(allConcepts.map((c) => c.field)),
 ];
+
+// ── 과학 현상 ──────────────────────────────────
+// 개념과 같은 블록·레벨 구조를 쓰지만, 들어오는 문이 '질문'이라는 점이 다르다.
+
+const phenomenonModules = import.meta.glob<{ default: Phenomenon }>(
+  '../content/phenomena/*.json',
+  { eager: true }
+);
+
+const phenomenaBySlug = new Map<string, Phenomenon>();
+for (const [path, mod] of Object.entries(phenomenonModules)) {
+  const phenomenon = mod.default;
+  const fileSlug = path.split('/').pop()!.replace(/\.json$/, '');
+  if (phenomenon.slug !== fileSlug) {
+    throw new Error(
+      `[content] 파일명과 slug가 다릅니다: ${path} (slug: "${phenomenon.slug}")`
+    );
+  }
+  phenomenaBySlug.set(phenomenon.slug, phenomenon);
+}
+
+export const allPhenomena: Phenomenon[] = [...phenomenaBySlug.values()].sort(
+  (a, b) => a.title.localeCompare(b.title, 'ko')
+);
+
+export function getPhenomenon(slug: string): Phenomenon | undefined {
+  return phenomenaBySlug.get(slug);
+}

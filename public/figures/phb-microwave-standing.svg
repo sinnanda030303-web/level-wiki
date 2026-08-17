@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 250" role="img" aria-label="전자레인지 내부에 생기는 정상파 그림. 전기장의 배가 되는 지점이 반파장 간격인 약 6.1센티미터마다 나타나고, 그 자리에서만 음식이 빨리 데워진다.">
+  <style>
+    text { font-family: system-ui, -apple-system, 'Segoe UI', 'Malgun Gothic', sans-serif; }
+    .ink { fill: #1c1b19; }
+    .muted { fill: #6b6862; }
+    .acc { fill: #b4531f; }
+    .wall { stroke: #1c1b19; fill: none; }
+    .wave { stroke: #3c7fb1; fill: none; }
+    .hot { fill: #b4531f; }
+    .axis { stroke: #c9c5bd; fill: none; }
+    .dim { stroke: #b4531f; fill: none; }
+    @media (prefers-color-scheme: dark) {
+      .ink { fill: #eceaf0; }
+      .muted { fill: #a3a0aa; }
+      .acc { fill: #e8925c; }
+      .wall { stroke: #eceaf0; }
+      .wave { stroke: #7fb4dd; }
+      .hot { fill: #e8925c; }
+      .axis { stroke: #4a4852; }
+      .dim { stroke: #e8925c; }
+    }
+  </style>
+
+  <text x="20" y="24" class="ink" font-size="13" font-weight="700">금속 벽 사이에 갇힌 전파는 제자리에서 출렁입니다</text>
+
+  <rect x="50" y="42" width="380" height="130" rx="4" class="wall" stroke-width="2.5"/>
+  <line x1="50" y1="107" x2="430" y2="107" class="axis" stroke-width="1" stroke-dasharray="3 3"/>
+
+  <path d="M50,107 C62,52 86,52 98,107 C110,162 134,162 146,107 C158,52 182,52 194,107 C206,162 230,162 242,107 C254,52 278,52 290,107 C302,162 326,162 338,107 C350,52 374,52 386,107 C398,162 418,162 430,107" class="wave" stroke-width="2.2"/>
+
+  <g class="hot">
+    <circle cx="74" cy="107" r="5"/>
+    <circle cx="170" cy="107" r="5"/>
+    <circle cx="266" cy="107" r="5"/>
+    <circle cx="362" cy="107" r="5"/>
+  </g>
+
+  <line x1="74" y1="188" x2="170" y2="188" class="dim" stroke-width="1.4"/>
+  <line x1="74" y1="182" x2="74" y2="194" class="dim" stroke-width="1.4"/>
+  <line x1="170" y1="182" x2="170" y2="194" class="dim" stroke-width="1.4"/>
+  <text x="122" y="207" class="acc" font-size="12" font-weight="700" text-anchor="middle">λ/2 ≈ 6.1 cm</text>
+
+  <text x="300" y="192" class="muted" font-size="11">주황 점 = 전기장의 배 = 뜨거운 곳</text>
+  <text x="300" y="207" class="muted" font-size="11">그 사이 마디에서는 거의 데워지지 않습니다</text>
+
+  <text x="240" y="234" class="muted" font-size="11" text-anchor="middle">회전 접시와 스터러는 음식이 이 무늬를 골고루 지나가게 만드는 장치입니다.</text>
+</svg>

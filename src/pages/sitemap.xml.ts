@@ -1,8 +1,15 @@
 import type { APIRoute } from 'astro';
-import { allConcepts, allFields } from '../lib/content';
+import { allConcepts, allFields, allPhenomena } from '../lib/content';
 
-/** 목록에 넣지 않는 것: 404, robots.txt, sitemap 자기 자신 */
-const STATIC_PATHS = ['/', '/about', '/contact', '/privacy', '/terms'];
+/** 목록에 넣지 않는 것: 404, /my(noindex), robots.txt, sitemap 자기 자신 */
+const STATIC_PATHS = [
+  '/',
+  '/phenomena',
+  '/about',
+  '/contact',
+  '/privacy',
+  '/terms',
+];
 
 function escapeXml(value: string): string {
   return value
@@ -20,6 +27,7 @@ export const GET: APIRoute = ({ site }) => {
     ...STATIC_PATHS,
     ...allFields.map((field) => `/f/${field}`),
     ...allConcepts.map((concept) => `/c/${concept.slug}`),
+    ...allPhenomena.map((p) => `/p/${p.slug}`),
   ];
 
   const urls = paths

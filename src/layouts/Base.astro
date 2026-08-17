@@ -1,7 +1,7 @@
 ---
 import 'katex/dist/katex.min.css';
 import '../styles/global.css';
-import { allFields } from '../lib/content';
+import { allFields, allPhenomena } from '../lib/content';
 import { FIELD_META } from '../lib/types';
 
 interface Props {
@@ -85,6 +85,23 @@ const year = new Date().getFullYear();
                 </a>
               </li>
             ))
+          }
+          {
+            allPhenomena.length > 0 && (
+              <li class="nav-sep">
+                <a
+                  href="/phenomena"
+                  data-active={
+                    path === '/phenomena' || path.startsWith('/p/')
+                      ? 'true'
+                      : undefined
+                  }
+                  aria-current={path === '/phenomena' ? 'page' : undefined}
+                >
+                  과학 현상
+                </a>
+              </li>
+            )
           }
         </ul>
       </nav>

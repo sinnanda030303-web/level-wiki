@@ -11,7 +11,6 @@ import SaveButton from './SaveButton';
 import { recordStuck, touchConcept } from '../lib/store';
 import {
   BLOCK_META,
-  FIELD_META,
   LEVELS,
   LEVEL_META,
   clampLevel,
@@ -20,7 +19,7 @@ import {
   sortBlocks,
   visibleSources,
 } from '../lib/types';
-import type { Concept, Level } from '../lib/types';
+import type { Block, ImageCredit, Level, Source, TermInfo } from '../lib/types';
 
 export interface ConceptLink {
   slug: string;
@@ -28,10 +27,28 @@ export interface ConceptLink {
   summary: string;
 }
 
+/**
+ * 개념 문서와 현상 문서가 함께 쓰는 최소 형태.
+ * 슬라이더를 두 벌로 만들지 않기 위해 읽기에 필요한 것만 추린다.
+ */
+export interface ReaderDoc {
+  slug: string;
+  title: string;
+  blocks: Block[];
+  terms?: Record<string, TermInfo>;
+  sources?: Source[];
+}
+
 interface Props {
-  concept: Concept;
+  concept: ReaderDoc;
+  /** 제목 위 작은 라벨. 개념은 분야, 현상은 '과학 현상' */
+  eyebrow?: { label: string; href: string };
+  /** 현상 문서 맨 위에 걸리는 사진 */
+  hero?: ImageCredit;
   prereq: ConceptLink[];
   next: ConceptLink[];
+  /** 하단 링크 묶음의 제목. 기본값은 개념용 문구 */
+  nextLabel?: string;
 }
 
 // 서버 렌더링 중에는 useLayoutEffect가 경고를 낸다
@@ -79,7 +96,14 @@ function Collapsible({
   );
 }
 
-export default function ConceptReader({ concept, prereq, next }: Props) {
+export default function ConceptReader({
+  concept,
+  eyebrow,
+  hero,
+  prereq,
+  next,
+  nextLabel = '이 개념 위에 쌓이는 것',
+}: Props) {
   const [level, setLevel] = useState<Level>(1);
   const [stuck, setStuck] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -146,11 +170,40 @@ export default function ConceptReader({ concept, prereq, next }: Props) {
   return (
     <article className="reader">
       <header className="reader-head">
-        <a className="field-tag" href={`/f/${concept.field}`}>
-          {FIELD_META[concept.field]?.label ?? concept.field}
-        </a>
+        {eyebrow && (
+          <a className="field-tag" href={eyebrow.href}>
+            {eyebrow.label}
+          </a>
+        )}
         <h1>{concept.title}</h1>
       </header>
+
+      {hero && (
+        <figure className="hero-photo">
+          <img src={hero.src} alt={hero.alt} loading="eager" decoding="async" />
+          <figcaption>
+            <span className="hero-caption">{hero.caption}</span>
+            <span className="hero-credit">
+              사진{' '}
+              <a href={hero.sourceUrl} target="_blank" rel="noopener noreferrer">
+                {hero.author}
+              </a>
+              {' · '}
+              {hero.licenseUrl ? (
+                <a
+                  href={hero.licenseUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {hero.license}
+                </a>
+              ) : (
+                hero.license
+              )}
+            </span>
+          </figcaption>
+        </figure>
+      )}
 
       <div className="slider-dock">
         <div className="slider-wrap">
@@ -292,7 +345,7 @@ export default function ConceptReader({ concept, prereq, next }: Props) {
 
         {next.length > 0 && (
           <div className="foot-next">
-            <h2 className="foot-label">이 개념 위에 쌓이는 것</h2>
+            <h2 className="foot-label">{nextLabel}</h2>
             <ul className="link-list">
               {next.map((c) => (
                 <li key={c.slug}>

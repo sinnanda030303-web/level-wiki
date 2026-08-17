@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 285" role="img" aria-label="적란운 안의 전하 분포 단면도. 위쪽에 양전하, 가운데 영하 10도에서 영하 25도 구간에 주된 음전하, 바닥 근처에 작은 양전하가 쌓인다. 상승기류가 가벼운 얼음 알갱이를 위로 올리고 무거운 싸락우박은 아래로 떨어지면서 전하가 갈라진다.">
+  <style>
+    text { font-family: system-ui, -apple-system, 'Segoe UI', 'Malgun Gothic', sans-serif; }
+    .ink { fill: #1c1b19; }
+    .muted { fill: #6b6862; }
+    .cloud { fill: #c9c5bd; opacity: 0.35; stroke: #c9c5bd; }
+    .pos { fill: #b4531f; }
+    .neg { fill: #3c7fb1; }
+    .up { stroke: #b4531f; fill: none; opacity: 0.7; }
+    .down { stroke: #3c7fb1; fill: none; opacity: 0.7; }
+    .axis { stroke: #c9c5bd; }
+    .ground { fill: #c9c5bd; }
+    @media (prefers-color-scheme: dark) {
+      .ink { fill: #eceaf0; }
+      .muted { fill: #a3a0aa; }
+      .cloud { fill: #4a4852; opacity: 0.5; stroke: #4a4852; }
+      .pos { fill: #e8925c; }
+      .neg { fill: #7fb4dd; }
+      .up { stroke: #e8925c; }
+      .down { stroke: #7fb4dd; }
+      .axis { stroke: #4a4852; }
+      .ground { fill: #4a4852; }
+    }
+  </style>
+
+  <!-- 적란운 -->
+  <path class="cloud" stroke-width="1" d="M120,44 L330,44 L300,66 Q320,74 300,84 L300,196 Q250,214 200,204 Q150,214 130,192 L130,88 Q108,76 128,66 Z"/>
+
+  <!-- 상단 양전하 -->
+  <g class="pos" font-size="15" font-weight="700" text-anchor="middle">
+    <text x="165" y="86">+</text><text x="200" y="80">+</text><text x="235" y="86">+</text>
+    <text x="265" y="80">+</text><text x="290" y="88">+</text><text x="215" y="98">+</text>
+    <text x="250" y="100">+</text>
+  </g>
+  <text x="340" y="86" class="pos" font-size="11" font-weight="700">상단 양전하</text>
+  <text x="340" y="99" class="muted" font-size="10">가벼운 얼음 알갱이가 실려 올라간다</text>
+
+  <!-- 중간 음전하 -->
+  <g class="neg" font-size="17" font-weight="700" text-anchor="middle">
+    <text x="160" y="140">−</text><text x="190" y="134">−</text><text x="220" y="142">−</text>
+    <text x="250" y="134">−</text><text x="280" y="140">−</text><text x="175" y="156">−</text>
+    <text x="205" y="158">−</text><text x="235" y="154">−</text><text x="265" y="158">−</text>
+  </g>
+  <text x="340" y="140" class="neg" font-size="11" font-weight="700">주 음전하층</text>
+  <text x="340" y="153" class="muted" font-size="10">싸락우박이 여기 머문다</text>
+
+  <!-- 하단 소량 양전하 -->
+  <g class="pos" font-size="13" font-weight="700" text-anchor="middle">
+    <text x="200" y="192">+</text><text x="230" y="194">+</text><text x="260" y="190">+</text>
+  </g>
+  <text x="340" y="192" class="pos" font-size="10">바닥의 작은 양전하</text>
+
+  <!-- 상승 / 하강 화살표 -->
+  <path class="up" stroke-width="1.6" d="M148,180 L148,110"/>
+  <polygon class="pos" points="148,104 144,113 152,113"/>
+  <text x="140" y="196" class="muted" font-size="9" text-anchor="middle">상승기류</text>
+
+  <path class="down" stroke-width="1.6" d="M300,120 L300,178"/>
+  <polygon class="neg" points="300,184 296,175 304,175"/>
+
+  <!-- 온도 축 -->
+  <line x1="70" y1="50" x2="70" y2="210" class="axis" stroke-width="1"/>
+  <g class="muted" font-size="10" text-anchor="end">
+    <text x="64" y="72">−40 °C</text>
+    <text x="64" y="122">−25 °C</text>
+    <text x="64" y="152">−10 °C</text>
+    <text x="64" y="205">0 °C</text>
+  </g>
+  <line x1="66" y1="118" x2="74" y2="118" class="axis" stroke-width="1"/>
+  <line x1="66" y1="148" x2="74" y2="148" class="axis" stroke-width="1"/>
+  <text x="30" y="130" class="ink" font-size="10" font-weight="700">고도</text>
+
+  <!-- 전하 반전 온도 구간 표시 -->
+  <rect x="70" y="118" width="20" height="30" class="pos" opacity="0.22"/>
+  <text x="80" y="112" class="muted" font-size="9" text-anchor="middle">전하 반전 온도</text>
+
+  <!-- 지면 -->
+  <rect x="0" y="238" width="480" height="47" class="ground" opacity="0.5"/>
+  <line x1="0" y1="238" x2="480" y2="238" class="axis" stroke-width="1.5"/>
+  <g class="pos" font-size="14" font-weight="700" text-anchor="middle">
+    <text x="150" y="234">+</text><text x="190" y="234">+</text><text x="230" y="234">+</text>
+    <text x="270" y="234">+</text><text x="310" y="234">+</text>
+  </g>
+  <text x="60" y="234" class="muted" font-size="10">지면에 유도된 양전하</text>
+
+  <text x="240" y="264" class="muted" font-size="11" text-anchor="middle">충돌 한 번에 옮겨가는 전하의 부호가 온도에 따라 뒤집힌다 — 그 미시 기전은 아직 미해결이다</text>
+  <text x="240" y="278" class="muted" font-size="10" text-anchor="middle">구름 속 전기장은 대체로 0.1~0.4 MV/m로, 마른 공기의 절연 파괴 기준보다 한 자릿수 낮다</text>
+</svg>
