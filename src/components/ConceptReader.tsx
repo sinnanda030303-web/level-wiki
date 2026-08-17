@@ -217,7 +217,7 @@ export default function ConceptReader({
             aria-label="설명 난이도"
             aria-valuetext={`${level}단계 ${LEVEL_META[level].label}`}
             onChange={(e) => changeLevel(clampLevel(e.target.value))}
-            style={{ ['--pct' as string]: `${((level - 1) / 4) * 100}%` }}
+            style={{ ['--f' as string]: `${(level - 1) / 4}` }}
           />
           <div className="ticks">
             {LEVELS.map((l) => (
@@ -229,6 +229,7 @@ export default function ConceptReader({
                 data-passed={l < level}
                 onClick={() => changeLevel(l)}
                 aria-pressed={l === level}
+                style={{ ['--f' as string]: `${(l - 1) / 4}` }}
               >
                 {LEVEL_META[l].label}
               </button>
