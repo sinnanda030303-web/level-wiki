@@ -1087,6 +1087,66 @@ a {
   color: var(--faint);
 }
 
+/* ── 막힘 리포트 ───────────────────────────── */
+.stuck-report-list {
+  list-style: none;
+  counter-reset: rank;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.stuck-report-item {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.8rem 0.95rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition:
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+.stuck-report-item:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.stuck-report-count {
+  flex: 0 0 auto;
+  min-width: 2.4rem;
+  padding: 0.3rem 0;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 999px;
+}
+
+.stuck-report-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.stuck-report-body b {
+  display: block;
+  font-size: 0.95rem;
+}
+
+.stuck-report-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.8rem;
+  margin-top: 0.35rem;
+  font-size: 0.76rem;
+  color: var(--faint);
+}
+
 /* ── 사이트 푸터 ───────────────────────────── */
 /* .wrap이 이미 아래쪽 여백을 갖고 있어 margin-top은 따로 주지 않는다 */
 .site-foot {

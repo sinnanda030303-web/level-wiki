@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import StuckReport from '../components/StuckReport';
+import { allConcepts, allPhenomena } from '../lib/content';
+
+// 슬러그 → 제목·주소. 개념과 현상 둘 다에서 막힘이 기록되므로 함께 모은다.
+const docs = [
+  ...allConcepts.map((c) => ({ slug: c.slug, title: c.title, href: `/c/${c.slug}` })),
+  ...allPhenomena.map((p) => ({ slug: p.slug, title: p.title, href: `/p/${p.slug}` })),
+];
+---
+
+<Base
+  title="막힘 리포트 — Level Wiki"
+  description="'여기서 막혔어요' 기록을 모아 다음에 손볼 문서의 우선순위를 봅니다."
+  wide
+  noindex
+>
+  <section class="hero my-hero">
+    <h1>막힘 리포트</h1>
+    <p>
+      &lsquo;여기서 막혔어요&rsquo;를 누른 기록을 모읍니다. 많이 쌓인 지점일수록
+      그 개념의 그 단계 설명이 부실하다는 신호입니다.
+    </p>
+  </section>
+
+  <!-- 로그인 세션은 localStorage에 있어 클라이언트에서만 판단할 수 있다 -->
+  <StuckReport client:only="react" docs={docs} />
+</Base>

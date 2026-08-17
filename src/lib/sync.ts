@@ -159,6 +159,29 @@ export async function syncNow(): Promise<SyncResult> {
   };
 }
 
+export interface StuckSummaryRow {
+  concept_slug: string;
+  level: number;
+  stuck_count: number;
+  last_stuck_at: string;
+}
+
+/**
+ * 막힘 로그 전체 집계를 가져온다. DB 함수(stuck_summary)가 운영자 계정만
+ * 걸러 데이터를 주므로, 여기서는 권한을 다시 검사하지 않는다. 운영자가
+ * 아니거나 로그인하지 않았으면 빈 배열이 온다.
+ *
+ * null은 네트워크·RPC 오류를 뜻하고, 빈 배열과는 구분해서 다룬다.
+ */
+export async function getStuckSummary(): Promise<StuckSummaryRow[] | null> {
+  const client = await getClient();
+  if (!client) return null;
+
+  const { data, error } = await client.rpc('stuck_summary');
+  if (error) return null;
+  return data as StuckSummaryRow[];
+}
+
 export async function getCurrentEmail(): Promise<string | null> {
   const client = await getClient();
   if (!client) return null;
