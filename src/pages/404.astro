@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import { allFields, conceptsByField } from '../lib/content';
+import { FIELD_META } from '../lib/types';
+---
+
+<Base
+  title="찾는 페이지가 없습니다 — 난이도 슬라이더 백과"
+  description="주소가 바뀌었거나 아직 없는 개념일 수 있습니다."
+  wide
+  noindex
+>
+  <div class="notfound">
+    <h1>404</h1>
+    <p>찾으시는 페이지가 없습니다. 주소가 바뀌었거나, 아직 쓰지 않은 개념일 수 있습니다.</p>
+
+    <ul class="link-list">
+      <li>
+        <a href="/">
+          <b>전체 개념 둘러보기</b>
+          <span>검색창에서 개념 이름으로 바로 찾을 수 있습니다.</span>
+        </a>
+      </li>
+      {
+        allFields.map((field) => (
+          <li>
+            <a href={`/f/${field}`}>
+              <b>
+                {FIELD_META[field]?.label ?? field} · {conceptsByField(field).length}개
+              </b>
+              <span>{FIELD_META[field]?.blurb}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p style="margin-top: 2rem; font-size: 0.85rem;">
+      다뤘으면 하는 개념이 있으면 <a href="/contact">알려 주세요.</a>
+    </p>
+  </div>
+</Base>

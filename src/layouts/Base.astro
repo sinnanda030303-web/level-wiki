@@ -1,18 +1,37 @@
 ---
 import 'katex/dist/katex.min.css';
 import '../styles/global.css';
+import { allFields } from '../lib/content';
+import { FIELD_META } from '../lib/types';
 
 interface Props {
   title: string;
   description?: string;
   wide?: boolean;
+  /** 검색엔진에서 제외할 페이지(404 등) */
+  noindex?: boolean;
+  /** 분야 목록 페이지가 아니어도 네비게이션에서 해당 분야를 표시한다 (개념 페이지용) */
+  activeField?: string;
 }
 
 const {
   title,
   description = '같은 개념을 다섯 단계 난이도로. 슬라이더를 움직여 자기 수준을 찾으세요.',
   wide = false,
+  noindex = false,
+  activeField,
 } = Astro.props;
+
+// Astro.site는 astro.config.mjs의 site 값. 로컬 개발에서도 안전하게 동작하도록 방어한다.
+const canonical = Astro.site
+  ? new URL(Astro.url.pathname, Astro.site).href
+  : Astro.url.pathname;
+
+const path = Astro.url.pathname;
+const isCurrentField = (field: string) =>
+  path === `/f/${field}` || field === activeField;
+
+const year = new Date().getFullYear();
 ---
 
 <!doctype html>
@@ -22,20 +41,91 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="난이도 슬라이더 백과" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="twitter:card" content="summary" />
+
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap.xml" />
   </head>
   <body>
+    <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+
     <header class="site-head">
       <div class="site-head-inner">
         <a class="site-title" href="/">난이도 슬라이더 백과</a>
         <span class="site-tagline">아는 만큼만 읽으세요</span>
       </div>
+      <nav class="site-nav" aria-label="분야">
+        <ul>
+          {
+            allFields.map((field) => (
+              <li>
+                <a
+                  href={`/f/${field}`}
+                  data-active={isCurrentField(field) ? 'true' : undefined}
+                  aria-current={path === `/f/${field}` ? 'page' : undefined}
+                >
+                  {FIELD_META[field]?.label ?? field}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
     </header>
-    <main class:list={['wrap', wide && 'wrap-wide']}>
+
+    <main id="main" class:list={['wrap', wide && 'wrap-wide']}>
       <slot />
     </main>
+
+    <footer class="site-foot">
+      <div class="foot-inner">
+        <div class="foot-brand">
+          <p class="foot-name">난이도 슬라이더 백과</p>
+          <p class="foot-blurb">
+            같은 개념을 다섯 단계 난이도로. 어디서 막히는지 스스로 보이게 하는 것이
+            목적입니다.
+          </p>
+        </div>
+
+        <nav class="foot-col" aria-label="분야 둘러보기">
+          <h2>분야</h2>
+          <ul>
+            {
+              allFields.map((field) => (
+                <li>
+                  <a href={`/f/${field}`}>
+                    {FIELD_META[field]?.label ?? field}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+
+        <nav class="foot-col" aria-label="사이트 정보">
+          <h2>사이트</h2>
+          <ul>
+            <li><a href="/about">소개</a></li>
+            <li><a href="/contact">문의</a></li>
+            <li><a href="/privacy">개인정보처리방침</a></li>
+            <li><a href="/terms">이용약관</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <p class="foot-legal">
+        © {year} 난이도 슬라이더 백과. 본문은 참고 자료를 바탕으로 새로 쓴 것이며,
+        도표는 직접 제작했습니다.
+      </p>
+    </footer>
   </body>
 </html>
