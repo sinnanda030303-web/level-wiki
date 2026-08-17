@@ -127,6 +127,16 @@ export default function MyWiki({ concepts }: Props) {
                       <span className="my-level">
                         {level}단계 · {LEVEL_META[level].label}
                       </span>
+                      {/* 퀴즈를 안 푼 개념에는 아예 표시하지 않는다.
+                          0%와 '아직 안 풂'은 전혀 다른 상태다. */}
+                      {typeof row.entry.understanding === 'number' && (
+                        <span
+                          className="my-understanding"
+                          data-weak={row.entry.understanding < 60}
+                        >
+                          이해도 {Math.round(row.entry.understanding)}%
+                        </span>
+                      )}
                       <span>{formatDate(row.entry.lastStudiedAt)}에 읽음</span>
                     </span>
                   </a>

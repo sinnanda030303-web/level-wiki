@@ -25,6 +25,8 @@ export interface SavedEntry {
   lastLevel: Level;
   /** 마지막으로 읽은 시각 (ISO) */
   lastStudiedAt: string;
+  /** 마지막 퀴즈 정답률 0~100. 아직 풀지 않았으면 없다. */
+  understanding?: number;
 }
 
 export interface StuckEntry {
@@ -77,6 +79,8 @@ function parse(raw: string | null): Store | null {
         lastLevel: (typeof e.lastLevel === 'number' ? e.lastLevel : 1) as Level,
         lastStudiedAt:
           typeof e.lastStudiedAt === 'string' ? e.lastStudiedAt : e.savedAt,
+        understanding:
+          typeof e.understanding === 'number' ? e.understanding : undefined,
       };
     }
 
@@ -217,6 +221,8 @@ export function saveConcept(slug: string, level: Level): Store {
       savedAt: store.saved[slug]?.savedAt ?? now,
       lastLevel: level,
       lastStudiedAt: now,
+      // 이미 풀어 둔 이해도가 있으면 유지한다.
+      understanding: store.saved[slug]?.understanding,
     };
   });
   pushRemote('upsert', { slug, entry: next.saved[slug] });
@@ -251,6 +257,36 @@ export function touchConcept(slug: string, level: Level): void {
     };
   });
   pushRemote('upsert', { slug, entry: next.saved[slug] });
+}
+
+/**
+ * 퀴즈 결과를 이해도로 남긴다.
+ *
+ * 누적 평균이 아니라 **마지막 점수로 덮어쓴다.** 다시 공부하고 다시 풀었을 때
+ * 올라간 실력이 곧바로 보여야 "약한 개념 → 복습 → 확인"이 한 바퀴로 돌기
+ * 때문이다. 평균을 내면 과거의 낮은 점수가 오래 발목을 잡는다.
+ */
+export function recordQuizResult(
+  scores: { conceptSlug: string; percent: number }[]
+): void {
+  const touched: string[] = [];
+
+  const next = update((store) => {
+    for (const score of scores) {
+      const entry = store.saved[score.conceptSlug];
+      // 저장을 뺀 개념의 점수는 남기지 않는다. 목록에 안 보이는 값이 된다.
+      if (!entry) continue;
+      store.saved[score.conceptSlug] = {
+        ...entry,
+        understanding: score.percent,
+      };
+      touched.push(score.conceptSlug);
+    }
+  });
+
+  for (const slug of touched) {
+    pushRemote('upsert', { slug, entry: next.saved[slug] });
+  }
 }
 
 export function recordStuck(slug: string, level: Level): void {

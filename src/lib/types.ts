@@ -109,6 +109,31 @@ export interface Phenomenon {
   relatedConcepts?: string[];
 }
 
+/**
+ * 미리 써 둔 객관식 문제 하나.
+ *
+ * AI로 실시간 생성하지 않고 콘텐츠로 저장한다. 그래서 서버도, API 키도,
+ * 호출 상한도 필요 없다. 문제는 개념 본문과 같은 급의 정적 자산이고,
+ * 채점은 브라우저에서 즉시 끝난다.
+ */
+export interface QuizQuestion {
+  /** 이 문제가 겨냥하는 난이도. 사용자가 그 개념을 읽은 단계에 맞춰 뽑는다. */
+  level: Level;
+  question: string;
+  /** 보기 4개. 순서는 화면에서 섞지 않는다(해설이 순서를 언급할 수 있으므로). */
+  choices: string[];
+  /** choices의 인덱스 */
+  answer: number;
+  /** 채점 후에 보여 줄 해설. 왜 틀렸는지까지 짚는다. */
+  explanation: string;
+}
+
+export interface QuizBank {
+  /** 대상 개념의 slug. 파일명과 같아야 한다. */
+  conceptSlug: string;
+  questions: QuizQuestion[];
+}
+
 export const FIELD_META: Record<string, { label: string; blurb: string }> = {
   thermodynamics: {
     label: '열역학',

@@ -19,18 +19,25 @@ src/
   content/
     concepts/*.json         개념 문서 (파일명 = slug)
     phenomena/*.json        과학 현상 문서
+    quiz/*.json             개념별 문제 은행 (파일명 = 개념 slug)
   lib/
     types.ts                레벨·블록 정의, 본문 선택 규칙
     content.ts              문서 로딩, slug 해석
     store.ts                학습 기록 (브라우저 저장 · 유일한 통로)
     supabase.ts             SDK를 필요할 때만 불러오는 얇은 래퍼
     sync.ts                 로그인 시 서버와 맞추기
+    graph.ts                선수 관계 그래프 배치 계산
+    quiz.ts                 문제 뽑기·채점 (순수 함수)
   components/
     ConceptReader.tsx       슬라이더 + 블록 여닫이 (개념·현상 공용)
     RichText.tsx            본문 인라인 문법 렌더러
     SaveButton.tsx          내 지식에 저장
     MyWiki.tsx              저장한 개념 목록
     AuthPanel.tsx           매직 링크 로그인
+    KnowledgeMap.tsx        분야별 지식 지도
+    FieldGraph.tsx          한 분야의 선수 관계 그래프
+    Quiz.tsx                문제 풀기 (선택 → 풀이 → 결과)
+    StuckReport.tsx         막힘 리포트 (운영자 전용)
   pages/
     index.astro             전체 목록 + 검색
     c/[slug].astro          개념 페이지
@@ -38,6 +45,8 @@ src/
     p/[slug].astro          현상 페이지
     phenomena.astro         현상 목록
     my.astro                내 지식
+    map.astro               지식 지도
+    quiz.astro              문제 풀기
     about·contact·privacy·terms·404
     sitemap.xml.ts, robots.txt.ts
 public/
@@ -165,9 +174,22 @@ RLS는 각자 자기 기록만 보게 막아 두므로, 전체를 집계하려�
 없거나 로그인하지 않은 사람에게는 항상 빈 배열이 갑니다 — "운영자가 아니다"를 따로
 알려주면 그 자체가 정보 노출이라, 빈 상태와 권한 없음을 화면에서도 구분하지 않습니다.
 
+## 문제 풀기
+
+`/quiz`에서 저장한 개념 중 문제가 준비된 것을 골라 5문항을 풉니다. 문제는 AI로
+실시간 생성하지 않고 `src/content/quiz/*.json`에 **미리 써 둡니다.** 그래서 서버도
+API 키도 필요 없고, 사이트는 100% 정적으로 남습니다. 채점은 브라우저에서 즉시
+끝나며, 결과는 `user_concepts.understanding`에 개념별 이해도로 남습니다.
+
+출제는 **읽은 단계 이하**로 제한됩니다 — 3단계까지 읽은 사람에게 5단계 문제를
+내면 시험이 아니라 함정이기 때문입니다. 오답 보기는 개념 문서의 "흔한 오해"
+블록에서 끌어옵니다. 자세한 형식과 설계 근거는 `docs/phase6-quiz.md`에 있습니다.
+
 ## 남은 일
 
-- **개인 지식 지도.** `prereq`/`next` 그래프가 이미 있으니 읽은 개념만 칠하면 됩니다.
+- **문제 채우기.** 현재 12개 개념 × 5문항. 나머지 41개 개념과 현상 7개가 비어
+  있습니다. 개념당 5문항이면 두세 번 풀 때 같은 문제가 도니, 자주 푸는 개념부터
+  10문항 이상으로 늘리는 것이 좋습니다. 형식은 `docs/phase6-quiz.md` 참고.
 - **L4·L5 검수.** 초안을 LLM으로 뽑더라도 이 두 레벨은 직접 확인해야 합니다.
   사이트 신뢰도가 여기서 갈립니다.
 - **공유 카드.** 현재는 URL 복사만 됩니다. 레벨이 박힌 이미지 카드를 만들면

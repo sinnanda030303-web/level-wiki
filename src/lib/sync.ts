@@ -17,6 +17,7 @@ interface Row {
   saved_at: string | null;
   last_level: number;
   last_studied_at: string;
+  understanding: number | null;
 }
 
 export interface SyncResult {
@@ -31,6 +32,7 @@ function rowToEntry(row: Row): SavedEntry {
     savedAt: row.saved_at ?? row.last_studied_at,
     lastLevel: clampLevel(row.last_level),
     lastStudiedAt: row.last_studied_at,
+    understanding: row.understanding ?? undefined,
   };
 }
 
@@ -41,6 +43,9 @@ function entryToRow(userId: string, slug: string, entry: SavedEntry) {
     saved_at: entry.savedAt,
     last_level: entry.lastLevel,
     last_studied_at: entry.lastStudiedAt,
+    // undefined를 그대로 보내면 upsert에서 열이 빠져 기존 값이 남는다.
+    // 아직 풀지 않은 상태를 명시하려면 null로 보내야 한다.
+    understanding: entry.understanding ?? null,
   };
 }
 
@@ -110,7 +115,7 @@ export async function syncNow(): Promise<SyncResult> {
 
   const { data, error } = await client
     .from('user_concepts')
-    .select('concept_slug, saved_at, last_level, last_studied_at')
+    .select('concept_slug, saved_at, last_level, last_studied_at, understanding')
     .eq('user_id', user.id);
 
   if (error) return { state: 'error', message: error.message };

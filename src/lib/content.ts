@@ -1,4 +1,4 @@
-import type { Concept, Phenomenon } from './types';
+import type { Concept, Phenomenon, QuizBank } from './types';
 
 const modules = import.meta.glob<{ default: Concept }>(
   '../content/concepts/*.json',
@@ -66,3 +66,42 @@ export const allPhenomena: Phenomenon[] = [...phenomenaBySlug.values()].sort(
 export function getPhenomenon(slug: string): Phenomenon | undefined {
   return phenomenaBySlug.get(slug);
 }
+
+// ── 문제 은행 ──────────────────────────────────
+// 개념마다 문제 파일 하나. 없는 개념도 있고, 그런 개념은 퀴즈에 나오지 않는다.
+// 콘텐츠가 늘어나는 속도와 문제가 늘어나는 속도가 다르므로 강제하지 않는다.
+
+const quizModules = import.meta.glob<{ default: QuizBank }>(
+  '../content/quiz/*.json',
+  { eager: true }
+);
+
+const quizBySlug = new Map<string, QuizBank>();
+for (const [path, mod] of Object.entries(quizModules)) {
+  const bank = mod.default;
+  const fileSlug = path.split('/').pop()!.replace(/\.json$/, '');
+  if (bank.conceptSlug !== fileSlug) {
+    throw new Error(
+      `[content] 파일명과 conceptSlug가 다릅니다: ${path} (conceptSlug: "${bank.conceptSlug}")`
+    );
+  }
+  // 문제가 붙을 개념이 실제로 있어야 한다. 오타를 빌드 때 잡는다.
+  if (!bySlug.has(bank.conceptSlug)) {
+    throw new Error(`[content] 없는 개념에 대한 문제 파일입니다: ${path}`);
+  }
+  for (const [i, q] of bank.questions.entries()) {
+    if (q.answer < 0 || q.answer >= q.choices.length) {
+      throw new Error(
+        `[content] ${path} ${i + 1}번 문제의 answer가 보기 범위를 벗어났습니다`
+      );
+    }
+  }
+  quizBySlug.set(bank.conceptSlug, bank);
+}
+
+export function getQuizBank(slug: string): QuizBank | undefined {
+  return quizBySlug.get(slug);
+}
+
+/** 문제가 준비된 개념 slug 목록. 퀴즈 화면에서 고를 수 있는 후보다. */
+export const quizReadySlugs: string[] = [...quizBySlug.keys()];

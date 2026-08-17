@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import Quiz from '../components/Quiz';
+import { allConcepts, getQuizBank } from '../lib/content';
+import type { QuizSource } from '../lib/quiz';
+
+// 문제가 준비된 개념만 넘긴다. 어느 것을 실제로 풀지는 저장 목록을 읽는
+// 브라우저가 정하므로, 여기서는 후보 전체를 실어 보낸다.
+const sources: QuizSource[] = allConcepts
+  .map((c) => {
+    const bank = getQuizBank(c.slug);
+    if (!bank) return null;
+    return {
+      conceptSlug: c.slug,
+      conceptTitle: c.title,
+      field: c.field,
+      summary: c.summary,
+      questions: bank.questions,
+    };
+  })
+  .filter((s): s is QuizSource => s !== null);
+---
+
+<Base
+  title="문제 풀기 — Level Wiki"
+  description="저장한 개념에서 문제를 뽑아 풀고, 약한 개념을 찾습니다."
+  wide
+  noindex
+>
+  <section class="hero my-hero">
+    <h1>문제 풀기</h1>
+    <p>
+      저장한 개념 중 문제가 준비된 것에서 5문항을 뽑습니다. 문제는 여러분이
+      읽은 난이도에 맞춰 나오고, 채점 결과는 개념별 이해도로 남습니다.
+    </p>
+  </section>
+
+  <!-- 저장 목록이 localStorage에 있어 클라이언트에서만 그릴 수 있다 -->
+  <Quiz client:only="react" sources={sources} />
+
+  <a class="back-link" href="/my">← 내 지식으로</a>
+</Base>
