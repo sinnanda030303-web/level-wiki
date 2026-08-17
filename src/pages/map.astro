@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import KnowledgeMap from '../components/KnowledgeMap';
+import { allConcepts, allFields } from '../lib/content';
+import { FIELD_META } from '../lib/types';
+
+const fields = allFields.map((field) => ({
+  field,
+  label: FIELD_META[field]?.label ?? field,
+  concepts: allConcepts
+    .filter((c) => c.field === field)
+    .map((c) => ({ slug: c.slug, title: c.title, prereq: c.prereq ?? [] })),
+}));
+---
+
+<Base
+  title="지식 지도 — Level Wiki"
+  description="저장한 개념이 분야별 선수 관계 그래프 위에서 어디까지 채워졌는지 봅니다."
+  wide
+  noindex
+>
+  <section class="hero my-hero">
+    <h1>지식 지도</h1>
+    <p>
+      개념 사이의 선수 관계를 분야별로 펼쳐 놓았습니다. 위쪽이 먼저 배우는
+      개념이고, 아래로 갈수록 그 위에 쌓입니다. 저장한 개념은 채워지고,
+      아직 안 읽은 개념은 테두리만 남습니다.
+    </p>
+  </section>
+
+  <!-- 저장 목록은 localStorage에 있어 클라이언트에서만 그릴 수 있다 -->
+  <KnowledgeMap client:only="react" fields={fields} />
+
+  <a class="back-link" href="/my">← 내 지식으로</a>
+</Base>

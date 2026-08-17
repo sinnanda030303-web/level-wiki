@@ -1087,6 +1087,153 @@ a {
   color: var(--faint);
 }
 
+/* ── 내 지식 → 지식 지도 진입 카드 ─────────── */
+.map-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  margin-bottom: 2rem;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--text);
+  transition: transform 160ms ease;
+}
+
+.map-link:hover {
+  transform: translateY(-1px);
+}
+
+.map-link b {
+  display: block;
+  font-size: 0.95rem;
+}
+
+.map-link > span > span {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.map-link-arrow {
+  flex: 0 0 auto;
+  font-size: 1.2rem;
+  color: var(--accent);
+}
+
+/* ── 지식 지도 ─────────────────────────────── */
+.kmap-field {
+  margin-bottom: 3.5rem;
+}
+
+.kmap-field h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-size: 1rem;
+  margin: 0 0 0.5rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.kmap-field h2 a {
+  text-decoration: none;
+}
+
+.kmap-field h2 a:hover {
+  color: var(--accent);
+}
+
+.kmap-progress {
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--faint);
+}
+
+.kmap-graph {
+  position: relative;
+  overflow-x: auto;
+  padding: 1.5rem 0.25rem 0.5rem;
+}
+
+/* width/height는 JS가 콘텐츠 전체 크기(scrollWidth/Height)로 인라인 지정한다.
+   100%로 두면 스크롤 컨테이너의 '보이는 폭'만 잡혀 스크롤할 때 카드와 선이
+   어긋난다. */
+.kmap-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.kmap-lines line {
+  stroke: var(--line);
+  stroke-width: 1.5;
+}
+
+.kmap-lines line[data-active='true'] {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.kmap-row {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-bottom: 2.4rem;
+  min-width: max-content;
+}
+
+.kmap-row:last-child {
+  margin-bottom: 0;
+}
+
+.kmap-node {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 7rem;
+  flex: 0 0 auto;
+  padding: 0.6rem 0.6rem;
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  font-size: 0.78rem;
+  line-height: 1.35;
+  text-align: center;
+  text-decoration: none;
+  color: var(--muted);
+  overflow-wrap: break-word;
+  transition:
+    border-color 160ms ease,
+    color 160ms ease,
+    background 160ms ease;
+}
+
+.kmap-node:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.kmap-node[data-learned='true'] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--text);
+  font-weight: 700;
+}
+
+.kmap-check {
+  color: var(--accent);
+}
+
 /* ── 막힘 리포트 ───────────────────────────── */
 .stuck-report-list {
   list-style: none;
@@ -1356,6 +1503,21 @@ a {
 
   .foot-brand {
     grid-column: 1 / -1;
+  }
+
+  .map-link {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+
+  .kmap-node {
+    width: 5.75rem;
+    font-size: 0.74rem;
+  }
+
+  .kmap-row {
+    gap: 0.5rem;
   }
 
   .auth-row {
