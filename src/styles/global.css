@@ -151,6 +151,35 @@ a {
   border-bottom-color: var(--accent);
 }
 
+/*
+ * '내 지식'은 분야가 아니므로 가로 스크롤되는 분야 목록에 넣지 않는다.
+ * 좁은 화면에서 목록 끝으로 밀려 잘리는 것을 막기 위함이다.
+ */
+.head-my {
+  margin-left: auto;
+  flex: 0 0 auto;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 0.2rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  transition:
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+.head-my:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.head-my[data-active='true'] {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
 /* ── 개념 페이지 헤더 ──────────────────────── */
 .reader-head {
   padding-top: 1rem;
@@ -694,6 +723,222 @@ a {
   color: var(--accent);
 }
 
+/* ── 내 지식에 저장 ────────────────────────── */
+.save-wrap {
+  margin-bottom: 1.5rem;
+}
+
+.btn-save {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 0.6rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    color 160ms ease;
+}
+
+.btn-save:hover {
+  opacity: 0.9;
+}
+
+/* 저장된 상태는 조용하게. 다시 누르면 빼는 토글이다. */
+.btn-save[data-saved='true'] {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.save-mark {
+  font-size: 0.95em;
+}
+
+.save-note {
+  margin: 0.6rem 0 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.save-note a {
+  color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+/* ── 내 지식 페이지 ────────────────────────── */
+.my-hero {
+  padding-bottom: 1.5rem;
+}
+
+.my-stats {
+  display: flex;
+  gap: 2.5rem;
+  padding: 1.2rem 1.3rem;
+  margin-bottom: 2.5rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-num {
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+}
+
+.stat-label {
+  font-size: 0.78rem;
+  color: var(--faint);
+}
+
+.my-field {
+  margin-bottom: 2.5rem;
+}
+
+.my-field h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-size: 1rem;
+  margin: 0 0 0.8rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.my-field h2 a {
+  text-decoration: none;
+}
+
+.my-field h2 a:hover {
+  color: var(--accent);
+}
+
+.my-field-count {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--faint);
+}
+
+.my-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.my-list li {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+
+.my-item {
+  flex: 1;
+  display: block;
+  padding: 0.8rem 0.95rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition:
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+.my-item:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.my-item b {
+  display: block;
+  font-size: 0.95rem;
+}
+
+.my-summary {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.my-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.8rem;
+  margin-top: 0.5rem;
+  font-size: 0.74rem;
+  color: var(--faint);
+}
+
+.my-level {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.my-remove {
+  flex: 0 0 auto;
+  font: inherit;
+  font-size: 0.75rem;
+  padding: 0 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: none;
+  color: var(--faint);
+  cursor: pointer;
+  transition:
+    color 160ms ease,
+    border-color 160ms ease;
+}
+
+.my-remove:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.my-empty {
+  padding: 2rem 0 1rem;
+}
+
+.my-empty-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.my-empty p {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.my-empty .link-list {
+  margin-top: 1.5rem;
+}
+
+.my-note {
+  margin-top: 3rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--faint);
+}
+
 /* ── 사이트 푸터 ───────────────────────────── */
 /* .wrap이 이미 아래쪽 여백을 갖고 있어 margin-top은 따로 주지 않는다 */
 .site-foot {
@@ -879,6 +1124,11 @@ a {
 
   .wrap {
     padding-bottom: 4rem;
+  }
+
+  /* 좁은 화면에서는 '내 지식' 버튼에 자리를 내준다 */
+  .site-tagline {
+    display: none;
   }
 
   /* 개념 페이지에서만 슬라이더가 하단에 고정되므로, 그 페이지에서만 자리를 비운다 */

@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+import MyWiki from '../components/MyWiki';
+import { allConcepts } from '../lib/content';
+
+// 저장소에는 slug만 들어 있으므로 제목·요약·분야는 빌드 타임에 함께 넘긴다.
+const concepts = allConcepts.map((c) => ({
+  slug: c.slug,
+  title: c.title,
+  summary: c.summary,
+  field: c.field,
+}));
+---
+
+<Base
+  title="내 지식 — 난이도 슬라이더 백과"
+  description="저장한 개념과 마지막으로 읽은 난이도를 모아 봅니다."
+  wide
+  noindex
+>
+  <section class="hero my-hero">
+    <h1>내 지식</h1>
+    <p>
+      저장한 개념과 마지막으로 읽은 난이도가 쌓입니다. 이 기록은 이 브라우저 안에만
+      저장되며 서버로 전송되지 않습니다.
+    </p>
+  </section>
+
+  <!-- localStorage는 서버에서 읽을 수 없어 클라이언트에서만 그린다 -->
+  <MyWiki client:only="react" concepts={concepts} />
+
+  <p class="my-note">
+    기기를 바꾸거나 브라우저 데이터를 지우면 이 목록도 사라집니다. 여러 기기에서
+    이어 보는 기능은 계정과 함께 준비하고 있습니다.
+  </p>
+</Base>

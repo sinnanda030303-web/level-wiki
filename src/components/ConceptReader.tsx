@@ -7,8 +7,11 @@ import {
   useState,
 } from 'react';
 import RichText from './RichText';
+import SaveButton from './SaveButton';
+import { recordStuck, touchConcept } from '../lib/store';
 import {
   BLOCK_META,
+  FIELD_META,
   LEVELS,
   LEVEL_META,
   clampLevel,
@@ -30,8 +33,6 @@ interface Props {
   prereq: ConceptLink[];
   next: ConceptLink[];
 }
-
-const STUCK_KEY = 'level-wiki:stuck';
 
 // 서버 렌더링 중에는 useLayoutEffect가 경고를 낸다
 const useIsoLayoutEffect =
@@ -78,19 +79,6 @@ function Collapsible({
   );
 }
 
-/** 막힌 지점을 남긴다. 지금은 로컬에만 쌓지만, 나중에 이 로그가 집필 우선순위가 된다. */
-function recordStuck(slug: string, level: Level) {
-  try {
-    const raw = window.localStorage.getItem(STUCK_KEY);
-    const log: unknown = raw ? JSON.parse(raw) : [];
-    const entries = Array.isArray(log) ? log : [];
-    entries.push({ slug, level, at: new Date().toISOString() });
-    window.localStorage.setItem(STUCK_KEY, JSON.stringify(entries.slice(-200)));
-  } catch {
-    // 시크릿 모드 등에서 localStorage가 막혀 있어도 읽기를 방해하진 않는다.
-  }
-}
-
 export default function ConceptReader({ concept, prereq, next }: Props) {
   const [level, setLevel] = useState<Level>(1);
   const [stuck, setStuck] = useState(false);
@@ -117,6 +105,18 @@ export default function ConceptReader({ concept, prereq, next }: Props) {
     window.history.replaceState(null, '', url);
     setCopied(false);
   }, [level]);
+
+  /**
+   * 사용자가 직접 난이도를 바꿨을 때만 진도를 기록한다.
+   * 단순 방문(초기 렌더)까지 기록하면 저장해 둔 진도가 1단계로 되돌아간다.
+   */
+  const changeLevel = useCallback(
+    (nextLevel: Level) => {
+      setLevel(nextLevel);
+      touchConcept(concept.slug, nextLevel);
+    },
+    [concept.slug]
+  );
 
   const onStuck = useCallback(() => {
     setStuck(true);
@@ -147,7 +147,7 @@ export default function ConceptReader({ concept, prereq, next }: Props) {
     <article className="reader">
       <header className="reader-head">
         <a className="field-tag" href={`/f/${concept.field}`}>
-          {concept.field === 'thermodynamics' ? '열역학' : concept.field}
+          {FIELD_META[concept.field]?.label ?? concept.field}
         </a>
         <h1>{concept.title}</h1>
       </header>
@@ -163,7 +163,7 @@ export default function ConceptReader({ concept, prereq, next }: Props) {
             value={level}
             aria-label="설명 난이도"
             aria-valuetext={`${level}단계 ${LEVEL_META[level].label}`}
-            onChange={(e) => setLevel(clampLevel(e.target.value))}
+            onChange={(e) => changeLevel(clampLevel(e.target.value))}
             style={{ ['--pct' as string]: `${((level - 1) / 4) * 100}%` }}
           />
           <div className="ticks">
@@ -174,7 +174,7 @@ export default function ConceptReader({ concept, prereq, next }: Props) {
                 className="tick"
                 data-active={l === level}
                 data-passed={l < level}
-                onClick={() => setLevel(l)}
+                onClick={() => changeLevel(l)}
                 aria-pressed={l === level}
               >
                 {LEVEL_META[l].label}
@@ -218,6 +218,8 @@ export default function ConceptReader({ concept, prereq, next }: Props) {
       </div>
 
       <footer className="reader-foot">
+        <SaveButton slug={concept.slug} level={level} />
+
         <div className="foot-actions">
           {!stuck ? (
             <button type="button" className="btn-stuck" onClick={onStuck}>
@@ -251,7 +253,7 @@ export default function ConceptReader({ concept, prereq, next }: Props) {
                 <button
                   type="button"
                   className="btn-ghost"
-                  onClick={() => setLevel((level - 1) as Level)}
+                  onClick={() => changeLevel((level - 1) as Level)}
                 >
                   한 단계 낮추기
                 </button>
