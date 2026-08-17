@@ -771,6 +771,83 @@ a {
   text-underline-offset: 3px;
 }
 
+/* ── 로그인 패널 ───────────────────────────── */
+.auth-box {
+  padding: 1.1rem 1.3rem;
+  margin-bottom: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.auth-in {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.auth-quiet {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.auth-title {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.auth-sub {
+  margin: 0.3rem 0 0;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.auth-copy {
+  margin-bottom: 0.9rem;
+}
+
+.auth-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.auth-input {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  font-size: 0.88rem;
+  padding: 0.6rem 0.8rem;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text);
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.auth-box .btn-save {
+  flex: 0 0 auto;
+}
+
+.auth-box .btn-save:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.auth-error {
+  margin: 0.7rem 0 0;
+  font-size: 0.8rem;
+  color: var(--accent);
+}
+
 /* ── 내 지식 페이지 ────────────────────────── */
 .my-hero {
   padding-bottom: 1.5rem;
@@ -1148,6 +1225,14 @@ a {
 
   .foot-brand {
     grid-column: 1 / -1;
+  }
+
+  .auth-row {
+    flex-direction: column;
+  }
+
+  .auth-in {
+    flex-direction: column;
   }
 
   .reader-head h1 {

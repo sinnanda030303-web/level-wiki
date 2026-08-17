@@ -71,6 +71,44 @@ export interface Concept {
   next?: string[];
 }
 
+/**
+ * 외부에서 가져온 사진. 출처 표시 의무가 있으므로 필드를 선택이 아닌 필수로 둔다.
+ * 직접 그린 SVG 도표에는 쓰지 않는다(그쪽은 본문에 ![캡션](경로)로 넣는다).
+ */
+export interface ImageCredit {
+  /** /photos/ 아래의 파일 경로 */
+  src: string;
+  /** 화면에 보이지 않는 대체 텍스트 */
+  alt: string;
+  /** 사진 아래에 보이는 설명 */
+  caption: string;
+  author: string;
+  /** 예: "CC BY-SA 4.0", "퍼블릭 도메인" */
+  license: string;
+  licenseUrl?: string;
+  /** 원본 파일 페이지 주소 */
+  sourceUrl: string;
+}
+
+/**
+ * 과학 현상. 개념과 같은 다섯 단계 블록 구조를 쓰되,
+ * 들어오는 문이 '질문'이라는 점이 다르다.
+ */
+export interface Phenomenon {
+  slug: string;
+  /** 목록과 제목에 쓰는 질문. 예: "하늘은 왜 파랄까?" */
+  title: string;
+  /** 목록 카드에 쓰는 한 줄 답. 항상 L1 톤으로. */
+  summary: string;
+  /** 맨 위에 걸리는 사진 */
+  hero?: ImageCredit;
+  blocks: Block[];
+  terms?: Record<string, TermInfo>;
+  sources?: Source[];
+  /** 이 현상을 설명하는 데 쓰이는 개념 문서 slug */
+  relatedConcepts?: string[];
+}
+
 export const FIELD_META: Record<string, { label: string; blurb: string }> = {
   thermodynamics: {
     label: '열역학',

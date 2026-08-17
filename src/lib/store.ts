@@ -8,6 +8,7 @@
  * 서버에서도 import되므로 모든 함수는 window가 없는 환경을 견뎌야 한다.
  */
 import type { Level } from './types';
+import { hasStoredSession } from './supabase';
 
 export const STORE_KEY = 'level-wiki:v1';
 
@@ -32,10 +33,17 @@ export interface StuckEntry {
   at: string;
 }
 
+/** 마지막으로 서버와 맞춘 기록. 계정이 바뀌면 처음부터 다시 합친다. */
+export interface SyncMark {
+  userId: string;
+  at: string;
+}
+
 export interface Store {
   version: 1;
   saved: Record<string, SavedEntry>;
   stuck: StuckEntry[];
+  lastSync?: SyncMark;
 }
 
 const EMPTY: Store = { version: 1, saved: {}, stuck: [] };
@@ -45,6 +53,7 @@ function clone(store: Store): Store {
     version: 1,
     saved: { ...store.saved },
     stuck: [...store.stuck],
+    lastSync: store.lastSync,
   };
 }
 
@@ -78,7 +87,13 @@ function parse(raw: string | null): Store | null {
         )
       : [];
 
-    return { version: 1, saved, stuck };
+    const mark = candidate.lastSync;
+    const lastSync =
+      mark && typeof mark.userId === 'string' && typeof mark.at === 'string'
+        ? { userId: mark.userId, at: mark.at }
+        : undefined;
+
+    return { version: 1, saved, stuck, lastSync };
   } catch {
     return null;
   }
@@ -138,12 +153,65 @@ function update(mutate: (store: Store) => void): Store {
   return next;
 }
 
+/**
+ * 서버로 변경을 밀어 보낸다.
+ *
+ * 로그인하지 않았으면 SDK를 부르지도 않는다. 화면은 이미 로컬 저장으로
+ * 갱신된 뒤이므로, 전송이 실패해도 사용자 경험은 그대로다.
+ * 다음 로그인 때 다시 맞춰진다.
+ */
+let suppressPush = false;
+
+function pushRemote(
+  action: 'upsert' | 'delete' | 'stuck',
+  payload: { slug: string; entry?: SavedEntry; level?: Level }
+): void {
+  if (suppressPush) return;
+  if (typeof window === 'undefined') return;
+  if (!hasStoredSession()) return;
+
+  import('./sync')
+    .then((m) => m.pushChange(action, payload))
+    .catch(() => {
+      // 네트워크나 로딩 실패. 로컬 기록은 이미 남았으므로 조용히 넘어간다.
+    });
+}
+
+/**
+ * 서버에서 받아온 내용을 로컬에 반영한다.
+ * 이 경로로 들어온 변경은 다시 서버로 밀어 보내지 않는다(메아리 방지).
+ */
+export function applyRemoteSnapshot(
+  saved: Record<string, SavedEntry>,
+  mark: SyncMark
+): Store {
+  suppressPush = true;
+  try {
+    return update((store) => {
+      store.saved = saved;
+      store.lastSync = mark;
+    });
+  } finally {
+    suppressPush = false;
+  }
+}
+
+export function getSyncMark(): SyncMark | undefined {
+  return readStore().lastSync;
+}
+
+export function clearSyncMark(): void {
+  update((store) => {
+    store.lastSync = undefined;
+  });
+}
+
 export function isSaved(slug: string): boolean {
   return slug in readStore().saved;
 }
 
 export function saveConcept(slug: string, level: Level): Store {
-  return update((store) => {
+  const next = update((store) => {
     const now = new Date().toISOString();
     store.saved[slug] = {
       savedAt: store.saved[slug]?.savedAt ?? now,
@@ -151,12 +219,16 @@ export function saveConcept(slug: string, level: Level): Store {
       lastStudiedAt: now,
     };
   });
+  pushRemote('upsert', { slug, entry: next.saved[slug] });
+  return next;
 }
 
 export function unsaveConcept(slug: string): Store {
-  return update((store) => {
+  const next = update((store) => {
     delete store.saved[slug];
   });
+  pushRemote('delete', { slug });
+  return next;
 }
 
 /**
@@ -169,12 +241,16 @@ export function touchConcept(slug: string, level: Level): void {
   if (!entry) return;
   if (entry.lastLevel === level) return;
 
-  update((next) => {
-    const target = next.saved[slug];
+  const next = update((store) => {
+    const target = store.saved[slug];
     if (!target) return;
-    target.lastLevel = level;
-    target.lastStudiedAt = new Date().toISOString();
+    store.saved[slug] = {
+      ...target,
+      lastLevel: level,
+      lastStudiedAt: new Date().toISOString(),
+    };
   });
+  pushRemote('upsert', { slug, entry: next.saved[slug] });
 }
 
 export function recordStuck(slug: string, level: Level): void {
@@ -185,6 +261,7 @@ export function recordStuck(slug: string, level: Level): void {
       store.stuck = store.stuck.slice(-200);
     }
   });
+  pushRemote('stuck', { slug, level });
 }
 
 export function savedCount(): number {
