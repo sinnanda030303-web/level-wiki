@@ -1,12 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
 import Quiz from '../components/Quiz';
-import { allConcepts, getQuizBank } from '../lib/content';
+import { allConcepts, allPhenomena, getQuizBank } from '../lib/content';
 import type { QuizSource } from '../lib/quiz';
 
-// 문제가 준비된 개념만 넘긴다. 어느 것을 실제로 풀지는 저장 목록을 읽는
+// 문제가 준비된 개념·현상만 넘긴다. 어느 것을 실제로 풀지는 저장 목록을 읽는
 // 브라우저가 정하므로, 여기서는 후보 전체를 실어 보낸다.
-const sources: QuizSource[] = allConcepts
+const conceptSources: QuizSource[] = allConcepts
   .map((c) => {
     const bank = getQuizBank(c.slug);
     if (!bank) return null;
@@ -19,6 +19,23 @@ const sources: QuizSource[] = allConcepts
     };
   })
   .filter((s): s is QuizSource => s !== null);
+
+// 현상은 field가 없으므로 'phenomena' 라벨로 고정한다.
+const phenomenonSources: QuizSource[] = allPhenomena
+  .map((p) => {
+    const bank = getQuizBank(p.slug);
+    if (!bank) return null;
+    return {
+      conceptSlug: p.slug,
+      conceptTitle: p.title,
+      field: 'phenomena',
+      summary: p.summary,
+      questions: bank.questions,
+    };
+  })
+  .filter((s): s is QuizSource => s !== null);
+
+const sources: QuizSource[] = [...conceptSources, ...phenomenonSources];
 ---
 
 <Base

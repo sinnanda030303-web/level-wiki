@@ -68,7 +68,7 @@ export function getPhenomenon(slug: string): Phenomenon | undefined {
 }
 
 // ── 문제 은행 ──────────────────────────────────
-// 개념마다 문제 파일 하나. 없는 개념도 있고, 그런 개념은 퀴즈에 나오지 않는다.
+// 개념이나 현상마다 문제 파일 하나. 없으면 그 문서는 퀴즈에 나오지 않는다.
 // 콘텐츠가 늘어나는 속도와 문제가 늘어나는 속도가 다르므로 강제하지 않는다.
 
 const quizModules = import.meta.glob<{ default: QuizBank }>(
@@ -85,9 +85,9 @@ for (const [path, mod] of Object.entries(quizModules)) {
       `[content] 파일명과 conceptSlug가 다릅니다: ${path} (conceptSlug: "${bank.conceptSlug}")`
     );
   }
-  // 문제가 붙을 개념이 실제로 있어야 한다. 오타를 빌드 때 잡는다.
-  if (!bySlug.has(bank.conceptSlug)) {
-    throw new Error(`[content] 없는 개념에 대한 문제 파일입니다: ${path}`);
+  // 문제가 붙을 개념이나 현상이 실제로 있어야 한다. 오타를 빌드 때 잡는다.
+  if (!bySlug.has(bank.conceptSlug) && !phenomenaBySlug.has(bank.conceptSlug)) {
+    throw new Error(`[content] 없는 개념/현상에 대한 문제 파일입니다: ${path}`);
   }
   for (const [i, q] of bank.questions.entries()) {
     if (q.answer < 0 || q.answer >= q.choices.length) {

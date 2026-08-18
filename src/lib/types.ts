@@ -155,6 +155,11 @@ export const FIELD_META: Record<string, { label: string; blurb: string }> = {
     label: '화학',
     blurb: '원자가 서로 만나고 갈라서는 규칙, 그리고 그 규칙이 만드는 물질의 세계.',
   },
+  /** 현상 문서는 field가 없으므로, 퀴즈 화면에서 분야 대신 이 라벨을 쓴다. */
+  phenomena: {
+    label: '과학 현상',
+    blurb: '일상에서 마주치는 질문에서 시작해 개념으로 이어지는 이야기.',
+  },
 };
 
 export function blockRange(block: Block): { min: Level; max: Level } {

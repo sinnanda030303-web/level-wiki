@@ -3,12 +3,14 @@ import { readStore, subscribe, unsaveConcept } from '../lib/store';
 import type { SavedEntry } from '../lib/store';
 import { FIELD_META, LEVEL_META, clampLevel } from '../lib/types';
 
-/** 빌드 타임에 넘겨받는 개념 메타데이터. 저장소에는 slug만 들어 있다. */
+/** 빌드 타임에 넘겨받는 개념·현상 메타데이터. 저장소에는 slug만 들어 있다. */
 export interface ConceptMeta {
   slug: string;
   title: string;
   summary: string;
   field: string;
+  /** 현상은 /p/ 아래, 개념은 /c/ 아래에 있다. */
+  isPhenomenon?: boolean;
 }
 
 interface Props {
@@ -111,16 +113,19 @@ export default function MyWiki({ concepts }: Props) {
       {[...byField.grouped.entries()].map(([field, rows]) => (
         <section className="my-field" key={field}>
           <h2>
-            <a href={`/f/${field}`}>{FIELD_META[field]?.label ?? field}</a>
+            <a href={field === 'phenomena' ? '/phenomena' : `/f/${field}`}>
+              {FIELD_META[field]?.label ?? field}
+            </a>
             <span className="my-field-count">{rows.length}개</span>
           </h2>
 
           <ul className="my-list">
             {rows.map((row) => {
               const level = clampLevel(row.entry.lastLevel);
+              const href = row.isPhenomenon ? '/p/' : '/c/';
               return (
                 <li key={row.slug}>
-                  <a className="my-item" href={`/c/${row.slug}?l=${level}`}>
+                  <a className="my-item" href={`${href}${row.slug}?l=${level}`}>
                     <b>{row.title}</b>
                     <span className="my-summary">{row.summary}</span>
                     <span className="my-meta">

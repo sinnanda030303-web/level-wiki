@@ -13,6 +13,12 @@ interface Props {
 
 const QUESTION_COUNT = 5;
 
+/** 현상은 /p/, 개념은 /c/ 아래에 있다. 어느 쪽인지는 sources의 field로 구분한다. */
+function hrefFor(slug: string, sources: QuizSource[], level: number): string {
+  const isPhenomenon = sources.find((s) => s.conceptSlug === slug)?.field === 'phenomena';
+  return `${isPhenomenon ? '/p/' : '/c/'}${slug}?l=${level}`;
+}
+
 /**
  * 받침 유무에 따라 조사를 고른다. '쿨롱 법칙을(를)'처럼 괄호를 다는 대신
  * 제대로 된 문장을 보여 주기 위한 것이다. 한글 음절은 유니코드에서
@@ -220,9 +226,11 @@ export default function Quiz({ sources }: Props) {
               </p>
               <a
                 className="quiz-relearn"
-                href={`/c/${result.weakest.conceptSlug}?l=${clampLevel(
-                  saved[result.weakest.conceptSlug]?.lastLevel ?? 1
-                )}`}
+                href={hrefFor(
+                  result.weakest.conceptSlug,
+                  sources,
+                  clampLevel(saved[result.weakest.conceptSlug]?.lastLevel ?? 1)
+                )}
               >
                 {result.weakest.conceptTitle} 다시 학습하기 →
               </a>

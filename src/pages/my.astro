@@ -2,15 +2,26 @@
 import Base from '../layouts/Base.astro';
 import MyWiki from '../components/MyWiki';
 import AuthPanel from '../components/AuthPanel';
-import { allConcepts } from '../lib/content';
+import { allConcepts, allPhenomena } from '../lib/content';
 
 // 저장소에는 slug만 들어 있으므로 제목·요약·분야는 빌드 타임에 함께 넘긴다.
-const concepts = allConcepts.map((c) => ({
-  slug: c.slug,
-  title: c.title,
-  summary: c.summary,
-  field: c.field,
-}));
+// 현상도 개념과 같은 방식으로 저장되므로(SaveButton 공용), 여기서 함께
+// 실어 보내지 않으면 저장은 되어도 목록에서 조용히 사라진다.
+const concepts = [
+  ...allConcepts.map((c) => ({
+    slug: c.slug,
+    title: c.title,
+    summary: c.summary,
+    field: c.field,
+  })),
+  ...allPhenomena.map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    summary: p.summary,
+    field: 'phenomena',
+    isPhenomenon: true,
+  })),
+];
 ---
 
 <Base
